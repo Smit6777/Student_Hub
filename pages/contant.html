@@ -1,0 +1,369 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - StudentHub</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", Arial, sans-serif;
+        }
+
+
+        body {
+            background: #f4f7fb;
+            color: #1e293b;
+        }
+
+
+        .contact-section {
+            padding: 50px 20px;
+        }
+
+
+        .heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+
+        .heading h1 {
+            font-size: 38px;
+            color: #2563eb;
+        }
+
+
+        .heading p {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #64748b;
+        }
+
+
+        .container {
+
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+
+        }
+
+
+        .card {
+
+            background: white;
+            padding: 30px;
+
+            border-radius: 18px;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+
+        }
+
+
+        .card h2 {
+
+            color:#2563eb;
+            margin-bottom:20px;
+
+        }
+
+
+        .info p {
+
+            margin:15px 0;
+            font-size:16px;
+
+        }
+
+
+        /* Form */
+
+        input, textarea {
+
+            width:100%;
+            padding:13px;
+
+            margin-bottom:15px;
+
+            border:1px solid #ddd;
+            border-radius:10px;
+
+            font-size:15px;
+
+        }
+
+
+        textarea {
+
+            height:120px;
+            resize:none;
+
+        }
+
+
+        button {
+
+            background:#2563eb;
+            color:white;
+
+            border:none;
+
+            padding:12px 25px;
+
+            border-radius:8px;
+
+            cursor:pointer;
+
+            font-size:16px;
+
+        }
+
+
+        button:hover {
+
+            background:#1d4ed8;
+
+        }
+
+
+
+        /* Social Links */
+
+        .social a {
+
+            display:block;
+
+            text-decoration:none;
+
+            color:#334155;
+
+            margin:15px 0;
+
+            font-size:17px;
+
+        }
+
+
+        .social a:hover {
+
+            color:#2563eb;
+
+        }
+
+
+
+        /* WhatsApp */
+
+        .whatsapp {
+
+            display:inline-block;
+
+            margin-top:15px;
+
+            padding:12px 20px;
+
+            background:#22c55e;
+
+            color:white;
+
+            border-radius:8px;
+
+            text-decoration:none;
+
+        }
+
+
+        .whatsapp:hover {
+
+            background:#16a34a;
+
+        }
+
+
+
+        .help {
+
+            grid-column: span 2;
+
+            text-align:center;
+
+        }
+
+
+
+        @media(max-width:768px){
+
+            .container{
+
+                grid-template-columns:1fr;
+
+            }
+
+
+            .help{
+
+                grid-column:span 1;
+
+            }
+
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<section class="contact-section">
+
+
+    <div class="heading">
+
+        <h1>📞 Contact StudentHub</h1>
+
+        <p>We'd Love to Hear From You!</p>
+
+    </div>
+
+
+
+    <div class="container">
+
+
+
+        <!-- Contact Information -->
+
+        <div class="card info">
+
+            <h2>👤 Contact Information</h2>
+
+            <p>📧 Email: smitmakwana6777@gmail.com</p>
+
+            <p>📞 Phone: 9998403012</p>
+
+            <p>📍 Address: Anand, Gujarat</p>
+
+            <p>
+                🏫 StudentHub is a platform for students to connect,
+                learn and grow.
+            </p>
+
+
+            <a class="whatsapp" 
+            href="https://wa.me/919998403012"
+            target="_blank">
+
+                💬 Chat on WhatsApp
+
+            </a>
+
+
+        </div>
+
+
+
+
+        <!-- Message Form -->
+
+        <div class="card">
+
+
+            <h2>💬 Send a Message</h2>
+
+
+            <form>
+
+
+                <input type="text" placeholder="Name">
+
+
+                <input type="email" placeholder="Email">
+
+
+                <input type="text" placeholder="Subject">
+
+
+                <textarea placeholder="Message"></textarea>
+
+
+                <button type="submit">
+
+                    Send Message
+
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+
+
+
+        <!-- Social Media -->
+
+        <div class="card social">
+
+
+            <h2>🌐 Connect With Me</h2>
+
+
+            <a href="https://www.instagram.com/smiiiit_67" target="_blank">
+                📷 Instagram
+            </a>
+
+
+            <a href="https://www.linkedin.com/in/smit-makwana-a949b8377" target="_blank">
+                💼 LinkedIn
+            </a>
+
+
+            <a href="https://github.com/Smit6777" target="_blank">
+                💻 GitHub
+            </a>
+
+
+        </div>
+
+
+
+
+        <!-- Help -->
+
+        <div class="card help">
+
+
+            <h2>❓ Need Help?</h2>
+
+            <p>
+                "We usually respond within 24 hours."
+            </p>
+
+
+        </div>
+
+
+
+    </div>
+
+
+</section>
+
+
+</body>
+
+</html>
