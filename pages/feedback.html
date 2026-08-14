@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback | StudentHub</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+    <script>if (localStorage.getItem("theme") === "dark") { document.documentElement.classList.add('dark-theme'); }</script>
+
+    <style>
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        textarea {
+            height: 120px;
+            resize: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
+        <h1>Student Feedback</h1>
+        <p>Help Us Improve StudentHub With Your Valuable Feedback!</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <button class="hamburger" aria-label="Toggle menu">☰</button>
+        <div id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="register.html">Register</a>
+            <a href="login.html">Login</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="events.html">Events</a>
+            <a href="profile.html">Profile</a>
+            <a href="contant.html">Contact</a>
+            <a href="admin.html">Admin</a>
+            <a href="faq.html">FAQ</a>
+            <a href="feedback.html">Feedback</a>
+            <button id="theme-toggle" style="margin-left: 10px; padding: 8px 14px; font-weight: 600;">🌙 Dark Mode</button>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- Why Feedback -->
+        <section>
+            <h2>💬 Why Your Feedback Matters</h2>
+            <p>
+                Your feedback helps us improve StudentHub and make it
+                better for everyone. Whether it's a suggestion, a bug report,
+                or a feature request — we want to hear from you!
+            </p>
+        </section>
+
+        <!-- Feedback Form -->
+        <section>
+            <h2>📝 Submit Your Feedback</h2>
+
+            <form id="feedback-form" data-draft-key="feedback-form-draft">
+                <label for="fbName">Full Name</label><br>
+                <input type="text" id="fbName" name="fbName" placeholder="Enter your name" required><br>
+
+                <label for="fbEmail">Email Address</label><br>
+                <input type="email" id="fbEmail" name="fbEmail" placeholder="Enter your email" required><br>
+
+                <label for="fbEnrollment">Enrollment Number</label><br>
+                <input type="text" id="fbEnrollment" name="fbEnrollment" placeholder="e.g. 22CS045"><br>
+
+                <label for="fbCategory">Feedback Category</label><br>
+                <select id="fbCategory" name="fbCategory" required>
+                    <option value="">Select Category</option>
+                    <option value="general">General Feedback</option>
+                    <option value="feature">Feature Request</option>
+                    <option value="bug">Bug Report</option>
+                    <option value="events">Events Related</option>
+                    <option value="ui">UI / Design</option>
+                    <option value="other">Other</option>
+                </select><br>
+
+                <label for="fbRating">Rating</label><br>
+                <select id="fbRating" name="fbRating">
+                    <option value="">Select Rating</option>
+                    <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                    <option value="4">⭐⭐⭐⭐ Very Good</option>
+                    <option value="3">⭐⭐⭐ Good</option>
+                    <option value="2">⭐⭐ Fair</option>
+                    <option value="1">⭐ Poor</option>
+                </select><br>
+
+                <label for="fbSubject">Subject</label><br>
+                <input type="text" id="fbSubject" name="fbSubject" placeholder="Brief subject of your feedback" required><br>
+
+                <label for="fbMessage">Your Feedback</label><br>
+                <textarea id="fbMessage" name="fbMessage" placeholder="Share your detailed feedback, suggestions, or report an issue..." required></textarea><br>
+
+                <button type="submit">🚀 Submit Feedback</button>
+            </form>
+        </section>
+
+        <!-- Recent Feedbacks -->
+        <section>
+            <h2>📋 Recent Feedback</h2>
+
+            <article>
+                <h3>Priya Patel — ⭐⭐⭐⭐⭐</h3>
+                <p>"The events page is really helpful! Would love to see a calendar view too."</p>
+            </article>
+
+            <article>
+                <h3>Raj Shah — ⭐⭐⭐⭐</h3>
+                <p>"Great portal for managing everything in one place. Dashboard is very clean."</p>
+            </article>
+
+            <article>
+                <h3>Kavya Joshi — ⭐⭐⭐⭐⭐</h3>
+                <p>"Love the design! Can we get a dark mode option in the future?"</p>
+            </article>
+        </section>
+
+        <!-- Feedback Stats -->
+        <aside>
+            <h2>📊 Feedback Overview</h2>
+
+            <p><strong>Total Feedback :</strong> 56</p>
+            <p><strong>Average Rating :</strong> 4.3 / 5</p>
+            <p><strong>Feature Requests :</strong> 18</p>
+            <p><strong>Bug Reports :</strong> 7</p>
+            <p><strong>General Feedback :</strong> 31</p>
+        </aside>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h2>🎓 StudentHub</h2>
+                <p>Your Digital Campus Portal for academics, events, workshops, and student life.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="events.html">Events</a>
+                <a href="contant.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📧 smitmakwana6777@gmail.com</p>
+                <p>📞 +91 9998403012</p>
+                <p>📍 CHARUSAT University</p>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">&copy; 2026 StudentHub | Designed by Smit Makwana</p>
+    </footer>
+
+    <script src="../javascripts/scripts.js"></script>
+
+</body>
+
+</html>
