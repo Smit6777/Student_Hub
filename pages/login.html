@@ -1,3 +1,4 @@
+<<<<<<< HEAD
  <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,3 +22,197 @@
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | StudentHub</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+    <script>if (localStorage.getItem("theme") === "dark") { document.documentElement.classList.add('dark-theme'); }</script>
+
+    <style>
+        .login-card {
+            background: white;
+            padding: 40px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .login-card h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #1d2b42;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+        }
+
+        .btn-login {
+            width: 100%;
+            background: linear-gradient(135deg, #38bdf8, #2563eb);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37,99,235,0.3);
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #64748b;
+        }
+
+        .register-link a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
+        <h1>Student Login</h1>
+        <p>Access Your StudentHub Account.</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <button class="hamburger" aria-label="Toggle menu">☰</button>
+        <div id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="register.html">Register</a>
+            <a href="login.html">Login</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="events.html">Events</a>
+            <a href="profile.html">Profile</a>
+            <a href="contant.html">Contact</a>
+            <a href="admin.html">Admin</a>
+            <a href="faq.html">FAQ</a>
+            <a href="feedback.html">Feedback</a>
+            <button id="theme-toggle" style="margin-left: 10px; padding: 8px 14px; font-weight: 600;">🌙 Dark Mode</button>
+        </div>
+    </nav>
+
+    <main>
+
+        <div class="login-card">
+
+            <h2>🔐 Login</h2>
+
+            <form id="login-form" data-draft-key="login-form-draft">
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password" required>
+                </div>
+
+                <button type="submit" class="btn-login">🚀 Login</button>
+
+            </form>
+
+            <p class="register-link">
+                Don't have an account? <a href="register.html">Register here</a>
+            </p>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+
+            <div class="footer-section">
+                <h2>🎓 StudentHub</h2>
+                <p>
+                    Your Digital Campus Portal for academics,
+                    events, workshops, and student life.
+                </p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="events.html">Events</a>
+                <a href="contant.html">Contact</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📧 smitmakwana6777@gmail.com</p>
+                <p>📞 +91 9998403012</p>
+                <p>📍 CHARUSAT University</p>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <p class="copyright">
+            &copy; 2026 StudentHub | Designed by Smit Makwana
+        </p>
+    </footer>
+
+        <script src="../javascripts/scripts.js"></script>
+
+    </body>
+
+    </html>
+>>>>>>> practical4-backup
