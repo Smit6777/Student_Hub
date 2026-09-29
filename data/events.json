@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "title": "AI & Data Science Workshop",
+    "category": "Workshop",
+    "date": "2026-10-05",
+    "time": "10:00 AM",
+    "location": "Innovation Lab",
+    "description": "Hands-on workshop on AI, data analysis, and machine learning basics."
+  },
+  {
+    "id": 2,
+    "title": "Startup Pitch Competition",
+    "category": "Hackathon",
+    "date": "2026-10-08",
+    "time": "11:30 AM",
+    "location": "Main Auditorium",
+    "description": "Students pitch startup ideas and prototypes to investors and faculty."
+  },
+  {
+    "id": 3,
+    "title": "Cyber Security Seminar",
+    "category": "Seminar",
+    "date": "2026-10-12",
+    "time": "2:00 PM",
+    "location": "Seminar Hall A",
+    "description": "Learn the latest cyber security threats, vulnerabilities, and prevention methods."
+  },
+  {
+    "id": 4,
+    "title": "Cloud Computing Tech Talk",
+    "category": "Tech Talk",
+    "date": "2026-10-15",
+    "time": "1:00 PM",
+    "location": "Room 204",
+    "description": "Explore cloud infrastructure, containers, and serverless architecture."
+  },
+  {
+    "id": 5,
+    "title": "UI/UX Design Sprint",
+    "category": "Workshop",
+    "date": "2026-10-18",
+    "time": "9:30 AM",
+    "location": "Design Studio",
+    "description": "A guided design sprint focusing on user research and interface prototyping."
+  },
+  {
+    "id": 6,
+    "title": "Blockchain Demo Day",
+    "category": "Tech Talk",
+    "date": "2026-10-22",
+    "time": "3:30 PM",
+    "location": "Tech Center",
+    "description": "Discover blockchain use cases, smart contracts, and digital trust systems."
+  },
+  {
+    "id": 7,
+    "title": "Web Development Bootcamp",
+    "category": "Workshop",
+    "date": "2026-10-25",
+    "time": "10:00 AM",
+    "location": "Computer Lab 1",
+    "description": "Build responsive websites using modern web technologies and frameworks."
+  },
+  {
+    "id": 8,
+    "title": "Robotics Challenge Finals",
+    "category": "Hackathon",
+    "date": "2026-10-29",
+    "time": "12:00 PM",
+    "location": "Robotics Arena",
+    "description": "Final round of the robotics challenge with student-built autonomous bots."
+  },
+  {
+    "id": 9,
+    "title": "Career Guidance Seminar",
+    "category": "Seminar",
+    "date": "2026-11-02",
+    "time": "11:00 AM",
+    "location": "Conference Hall",
+    "description": "Gain insights into career paths, skill-building, and campus-to-industry transitions."
+  },
+  {
+    "id": 10,
+    "title": "Mobile App Development Session",
+    "category": "Workshop",
+    "date": "2026-11-05",
+    "time": "2:30 PM",
+    "location": "App Lab",
+    "description": "Hands-on session for creating mobile apps with practical UI patterns."
+  },
+  {
+    "id": 11,
+    "title": "Research Poster Expo",
+    "category": "Seminar",
+    "date": "2026-11-08",
+    "time": "9:00 AM",
+    "location": "Gallery Hall",
+    "description": "Students present research posters and get peer feedback."
+  },
+  {
+    "id": 12,
+    "title": "Open Source Contribution Drive",
+    "category": "Hackathon",
+    "date": "2026-11-11",
+    "time": "1:30 PM",
+    "location": "Innovation Center",
+    "description": "Students collaborate to contribute to real-world open-source projects."
+  },
+  {
+    "id": 13,
+    "title": "Digital Marketing Masterclass",
+    "category": "Workshop",
+    "date": "2026-11-14",
+    "time": "3:00 PM",
+    "location": "Business Block",
+    "description": "Learn SEO, social media growth, analytics, and digital branding."
+  },
+  {
+    "id": 14,
+    "title": "IoT Innovation Talk",
+    "category": "Tech Talk",
+    "date": "2026-11-18",
+    "time": "10:30 AM",
+    "location": "Electronics Lab",
+    "description": "Learn how IoT devices are transforming homes, healthcare, and cities."
+  },
+  {
+    "id": 15,
+    "title": "Final Year Project Showcase",
+    "category": "Seminar",
+    "date": "2026-11-22",
+    "time": "12:30 PM",
+    "location": "Main Stage",
+    "description": "A showcase of final-year student projects with faculty evaluation."
+  }
+]
