@@ -1,0 +1,17 @@
+[
+  {"id":1,"question":"What is StudentHub?","answer":"StudentHub is a digital campus portal where students can explore academic resources, events, notices, and profile information in one place."},
+  {"id":2,"question":"How do I register on StudentHub?","answer":"Go to the registration page, fill in your details, and create a secure password to complete the signup process."},
+  {"id":3,"question":"Can I view upcoming events?","answer":"Yes, the Events page shows all upcoming events with dates, locations, and categories for easy browsing."},
+  {"id":4,"question":"Is StudentHub available for all courses?","answer":"Yes, StudentHub is designed for students from all departments and academic years."},
+  {"id":5,"question":"How can I search for an event?","answer":"Use the search box on the Events page and type keywords related to the event title to quickly find matches."},
+  {"id":6,"question":"Can I filter students by course?","answer":"Yes, the Students page allows filtering by course and year to view the required records."},
+  {"id":7,"question":"What is the purpose of FAQs?","answer":"FAQs help students quickly find answers to common questions without contacting support every time."},
+  {"id":8,"question":"Do I need to install anything to use StudentHub?","answer":"No, StudentHub is a browser-based project. You can view it through a local web server like Live Server."},
+  {"id":9,"question":"Why do we use JSON files in this project?","answer":"JSON files keep the data separate from the HTML code and make it easier to fetch and render data dynamically."},
+  {"id":10,"question":"What is the Fetch API used for?","answer":"Fetch API is used to request external data from JSON files and display the response in the browser dynamically."},
+  {"id":11,"question":"How are records sorted in the pages?","answer":"The data is filtered first, then sorted, and finally sliced for pagination before rendering on the screen."},
+  {"id":12,"question":"What happens if there are no matching results?","answer":"The page displays a clear message such as No events found or No results found for the selected filters."},
+  {"id":13,"question":"What is pagination?","answer":"Pagination splits a large dataset into pages so the user can view only a few records at a time."},
+  {"id":14,"question":"Can I sort answers alphabetically?","answer":"Yes, FAQ questions can be sorted in ascending or descending alphabetical order for quick browsing."},
+  {"id":15,"question":"Why is a loading message important?","answer":"A loading message tells the user that data is still being fetched and helps improve the user experience."}
+]

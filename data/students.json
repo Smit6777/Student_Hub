@@ -1,0 +1,17 @@
+[
+  {"id":1,"name":"Aarav Patel","email":"aarav.patel@example.com","course":"BCA","year":1},
+  {"id":2,"name":"Diya Sharma","email":"diya.sharma@example.com","course":"BSc","year":2},
+  {"id":3,"name":"Rohan Mehta","email":"rohan.mehta@example.com","course":"BTech","year":3},
+  {"id":4,"name":"Saanvi Joshi","email":"saanvi.joshi@example.com","course":"MBA","year":1},
+  {"id":5,"name":"Vihaan Verma","email":"vihaan.verma@example.com","course":"BCA","year":2},
+  {"id":6,"name":"Ananya Nair","email":"ananya.nair@example.com","course":"BTech","year":4},
+  {"id":7,"name":"Yash Gupta","email":"yash.gupta@example.com","course":"BSc","year":3},
+  {"id":8,"name":"Pooja Shah","email":"pooja.shah@example.com","course":"MBA","year":2},
+  {"id":9,"name":"Karan Desai","email":"karan.desai@example.com","course":"BCA","year":3},
+  {"id":10,"name":"Meera Iyer","email":"meera.iyer@example.com","course":"BTech","year":1},
+  {"id":11,"name":"Tushar Singh","email":"tushar.singh@example.com","course":"BSc","year":4},
+  {"id":12,"name":"Ishita Rao","email":"ishita.rao@example.com","course":"MBA","year":3},
+  {"id":13,"name":"Aditya Kulkarni","email":"aditya.kulkarni@example.com","course":"BCA","year":4},
+  {"id":14,"name":"Nisha Kapoor","email":"nisha.kapoor@example.com","course":"BTech","year":2},
+  {"id":15,"name":"Rahul Mishra","email":"rahul.mishra@example.com","course":"BSc","year":1}
+]

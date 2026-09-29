@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f6fb;
+            color: #333;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #1f2937;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #1f2937;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 5px;
+        }
+
+        .radio-group label {
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .checkbox-group label {
+            font-weight: normal;
+            margin: 0;
+        }
+
+        .btn {
+            width: 100%;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 13px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .error {
+            color: #dc2626;
+            font-size: 13px;
+            display: block;
+            margin-top: 6px;
+            min-height: 18px;
+        }
+
+        .success {
+            display: none;
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #dcfce7;
+            color: #166534;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Registration Form</h2>
+
+        <form id="studentForm" novalidate>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name">
+                <span id="nameError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email">
+                <span id="emailError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="mobile">Mobile Number</label>
+                <input type="text" id="mobile" name="mobile" placeholder="Enter 10-digit mobile number">
+                <span id="mobileError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter password">
+                <span id="passwordError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password">
+                <span id="confirmPasswordError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="course">Course</label>
+                <select id="course" name="course">
+                    <option value="">Select a course</option>
+                    <option value="BCA">BCA</option>
+                    <option value="BSc">BSc</option>
+                    <option value="BTech">BTech</option>
+                    <option value="MBA">MBA</option>
+                </select>
+                <span id="courseError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year</label>
+                <select id="year" name="year">
+                    <option value="">Select year</option>
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                </select>
+                <span id="yearError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" value="Male"> Male</label>
+                    <label><input type="radio" name="gender" value="Female"> Female</label>
+                    <label><input type="radio" name="gender" value="Other"> Other</label>
+                </div>
+                <span id="genderError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" name="terms">
+                    <label for="terms">I accept the terms and conditions.</label>
+                </div>
+                <span id="termsError" class="error"></span>
+            </div>
+
+            <button type="submit" class="btn">Register</button>
+        </form>
+
+        <div id="successMessage" class="success">Registration Successful!</div>
+    </div>
+
+    <script>
+        // Get the form and success message elements
+        var form = document.getElementById('studentForm');
+        var successMessage = document.getElementById('successMessage');
+
+        // This function shows an error next to a field
+        function showError(id, message) {
+            var errorBox = document.getElementById(id);
+            errorBox.textContent = message;
+        }
+
+        // This function clears the error message for a field
+        function clearError(id) {
+            var errorBox = document.getElementById(id);
+            errorBox.textContent = '';
+        }
+
+        // Validate name: only alphabets, minimum 3 characters
+        function validateName() {
+            var name = document.getElementById('name').value.trim();
+            var namePattern = /^[A-Za-z]{3,}$/;
+
+            if (name === '') {
+                showError('nameError', 'Name is required.');
+                return false;
+            }
+
+            if (!namePattern.test(name)) {
+                showError('nameError', 'Name must contain only letters and at least 3 characters.');
+                return false;
+            }
+
+            clearError('nameError');
+            return true;
+        }
+
+        // Validate email using regex pattern
+        function validateEmail() {
+            var email = document.getElementById('email').value.trim();
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (email === '') {
+                showError('emailError', 'Email is required.');
+                return false;
+            }
+
+            if (!emailPattern.test(email)) {
+                showError('emailError', 'Please enter a valid email address.');
+                return false;
+            }
+
+            clearError('emailError');
+            return true;
+        }
+
+        // Validate mobile: exactly 10 digits
+        function validateMobile() {
+            var mobile = document.getElementById('mobile').value.trim();
+            var mobilePattern = /^\d{10}$/;
+
+            if (mobile === '') {
+                showError('mobileError', 'Mobile number is required.');
+                return false;
+            }
+
+            if (!mobilePattern.test(mobile)) {
+                showError('mobileError', 'Mobile number must contain exactly 10 digits.');
+                return false;
+            }
+
+            clearError('mobileError');
+            return true;
+        }
+
+        // Validate password: minimum 8 chars, uppercase, digit, and special character
+        function validatePassword() {
+            var password = document.getElementById('password').value;
+            var passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+            if (password === '') {
+                showError('passwordError', 'Password is required.');
+                return false;
+            }
+
+            if (!passwordPattern.test(password)) {
+                showError('passwordError', 'Password must be at least 8 characters, include uppercase, number, and special character.');
+                return false;
+            }
+
+            clearError('passwordError');
+            return true;
+        }
+
+        // Validate confirm password: must match password
+        function validateConfirmPassword() {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (confirmPassword === '') {
+                showError('confirmPasswordError', 'Please confirm your password.');
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                showError('confirmPasswordError', 'Passwords do not match.');
+                return false;
+            }
+
+            clearError('confirmPasswordError');
+            return true;
+        }
+
+        // Validate course dropdown selection
+        function validateCourse() {
+            var course = document.getElementById('course').value;
+
+            if (course === '') {
+                showError('courseError', 'Please select a course.');
+                return false;
+            }
+
+            clearError('courseError');
+            return true;
+        }
+
+        // Validate year dropdown selection
+        function validateYear() {
+            var year = document.getElementById('year').value;
+
+            if (year === '') {
+                showError('yearError', 'Please select a year.');
+                return false;
+            }
+
+            clearError('yearError');
+            return true;
+        }
+
+        // Validate gender radio button selection
+        function validateGender() {
+            var selectedGender = document.querySelector('input[name="gender"]:checked');
+
+            if (!selectedGender) {
+                showError('genderError', 'Please select your gender.');
+                return false;
+            }
+
+            clearError('genderError');
+            return true;
+        }
+
+        // Validate terms checkbox
+        function validateTerms() {
+            var terms = document.getElementById('terms').checked;
+
+            if (!terms) {
+                showError('termsError', 'You must accept the terms and conditions.');
+                return false;
+            }
+
+            clearError('termsError');
+            return true;
+        }
+
+        // Add event listeners so validation runs while user types or changes values
+        document.getElementById('name').addEventListener('input', validateName);
+        document.getElementById('email').addEventListener('input', validateEmail);
+        document.getElementById('mobile').addEventListener('input', validateMobile);
+        document.getElementById('password').addEventListener('input', validatePassword);
+        document.getElementById('confirmPassword').addEventListener('input', validateConfirmPassword);
+        document.getElementById('course').addEventListener('change', validateCourse);
+        document.getElementById('year').addEventListener('change', validateYear);
+        document.querySelectorAll('input[name="gender"]').forEach(function (radio) {
+            radio.addEventListener('change', validateGender);
+        });
+        document.getElementById('terms').addEventListener('change', validateTerms);
+
+        // Main form submission check
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            successMessage.style.display = 'none';
+
+            var isValid = true;
+
+            if (!validateName()) isValid = false;
+            if (!validateEmail()) isValid = false;
+            if (!validateMobile()) isValid = false;
+            if (!validatePassword()) isValid = false;
+            if (!validateConfirmPassword()) isValid = false;
+            if (!validateCourse()) isValid = false;
+            if (!validateYear()) isValid = false;
+            if (!validateGender()) isValid = false;
+            if (!validateTerms()) isValid = false;
+
+            if (isValid) {
+                successMessage.style.display = 'block';
+                form.reset();
+            }
+        });
+    </script>
+</body>
+</html>

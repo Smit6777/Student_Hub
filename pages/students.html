@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students | StudentHub</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .controls input,
+        .controls select {
+            flex: 1;
+            min-width: 180px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        .student-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .student-card {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-left: 5px solid #2563eb;
+        }
+
+        .student-card h3 {
+            margin-bottom: 10px;
+            color: #1d2b42;
+        }
+
+        .student-card p {
+            margin: 6px 0;
+            color: #475569;
+        }
+
+        .status-box {
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            color: #475569;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-top: 22px;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @media(max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <script>if (localStorage.getItem("theme") === "dark") { document.documentElement.classList.add('dark-theme'); }</script>
+</head>
+<body>
+    <header>
+        <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
+        <h1>Student Directory</h1>
+        <p>Search and filter student records using the external JSON data.</p>
+    </header>
+
+    <nav>
+        <button class="hamburger" aria-label="Toggle menu">☰</button>
+        <div id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="register.html">Register</a>
+            <a href="login.html">Login</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="events.html">Events</a>
+            <a href="students.html">Students</a>
+            <a href="profile.html">Profile</a>
+            <a href="contact.html">Contact</a>
+            <a href="admin.html">Admin</a>
+            <a href="faq.html">FAQ</a>
+            <a href="feedback.html">Feedback</a>
+            <button id="theme-toggle" style="margin-left: 10px; padding: 8px 14px; font-weight: 600;">🌙 Dark Mode</button>
+        </div>
+    </nav>
+
+    <main>
+        <section>
+            <div class="controls">
+                <input type="text" id="studentSearch" placeholder="🔍 Search student by name...">
+                <select id="studentCourse">
+                    <option value="all">All Courses</option>
+                    <option value="BCA">BCA</option>
+                    <option value="BSc">BSc</option>
+                    <option value="BTech">BTech</option>
+                    <option value="MBA">MBA</option>
+                </select>
+                <select id="studentYear">
+                    <option value="all">All Years</option>
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                </select>
+                <select id="studentSort">
+                    <option value="name-asc">Sort: Name A-Z</option>
+                    <option value="name-desc">Sort: Name Z-A</option>
+                    <option value="year-asc">Sort: Year Low to High</option>
+                    <option value="year-desc">Sort: Year High to Low</option>
+                </select>
+            </div>
+
+            <div id="studentStatus" class="status-box">Loading students...</div>
+            <div id="studentList" class="student-grid"></div>
+
+            <div class="pagination">
+                <button id="studentPrev" type="button">Previous</button>
+                <span id="studentPageInfo">Page 1</span>
+                <button id="studentNext" type="button">Next</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h2>🎓 StudentHub</h2>
+                <p>Your Digital Campus Portal for academics, events, workshops, and student life.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📧 smitmakwana6777@gmail.com</p>
+                <p>📞 +91 9998403012</p>
+                <p>📍 CHARUSAT University</p>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">&copy; 2026 StudentHub | Designed by Smit Makwana</p>
+    </footer>
+
+    <script src="../javascripts/scripts.js"></script>
+    <script>
+        const studentItemsPerPage = 5;
+        let allStudents = [];
+        let currentStudentPage = 1;
+
+        const studentSearch = document.getElementById('studentSearch');
+        const studentCourse = document.getElementById('studentCourse');
+        const studentYear = document.getElementById('studentYear');
+        const studentSort = document.getElementById('studentSort');
+        const studentList = document.getElementById('studentList');
+        const studentStatus = document.getElementById('studentStatus');
+        const studentPrev = document.getElementById('studentPrev');
+        const studentNext = document.getElementById('studentNext');
+        const studentPageInfo = document.getElementById('studentPageInfo');
+
+        function updateStudentPagination(totalPages) {
+            const total = Math.max(totalPages, 1);
+            studentPrev.disabled = currentStudentPage <= 1;
+            studentNext.disabled = currentStudentPage >= total;
+            studentPageInfo.textContent = 'Page ' + currentStudentPage + ' of ' + total;
+        }
+
+        function getFilteredStudents() {
+            let result = [...allStudents];
+            const searchText = studentSearch.value.trim().toLowerCase();
+            const selectedCourse = studentCourse.value;
+            const selectedYear = studentYear.value;
+            const selectedSort = studentSort.value;
+
+            if (searchText !== '') {
+                result = result.filter(function (student) {
+                    return student.name.toLowerCase().includes(searchText);
+                });
+            }
+
+            if (selectedCourse !== 'all') {
+                result = result.filter(function (student) {
+                    return student.course === selectedCourse;
+                });
+            }
+
+            if (selectedYear !== 'all') {
+                result = result.filter(function (student) {
+                    return String(student.year) === selectedYear;
+                });
+            }
+
+            if (selectedSort === 'name-asc') {
+                result.sort(function (a, b) {
+                    return a.name.localeCompare(b.name);
+                });
+            } else if (selectedSort === 'name-desc') {
+                result.sort(function (a, b) {
+                    return b.name.localeCompare(a.name);
+                });
+            } else if (selectedSort === 'year-asc') {
+                result.sort(function (a, b) {
+                    return Number(a.year) - Number(b.year);
+                });
+            } else if (selectedSort === 'year-desc') {
+                result.sort(function (a, b) {
+                    return Number(b.year) - Number(a.year);
+                });
+            }
+
+            return result;
+        }
+
+        function renderStudents() {
+            const filteredStudents = getFilteredStudents();
+            const totalPages = Math.ceil(filteredStudents.length / studentItemsPerPage) || 1;
+            currentStudentPage = Math.min(currentStudentPage, totalPages);
+
+            const startIndex = (currentStudentPage - 1) * studentItemsPerPage;
+            const pageStudents = filteredStudents.slice(startIndex, startIndex + studentItemsPerPage);
+
+            studentList.innerHTML = '';
+
+            if (pageStudents.length === 0) {
+                studentList.innerHTML = '<div class="empty-state">No students found.</div>';
+                studentStatus.textContent = 'No students found for the current search and filters.';
+                updateStudentPagination(1);
+                return;
+            }
+
+            pageStudents.forEach(function (student) {
+                const card = document.createElement('div');
+                card.className = 'student-card';
+
+                const title = document.createElement('h3');
+                title.textContent = student.name;
+
+                const email = document.createElement('p');
+                email.textContent = 'Email: ' + student.email;
+
+                const course = document.createElement('p');
+                course.textContent = 'Course: ' + student.course;
+
+                const year = document.createElement('p');
+                year.textContent = 'Year: ' + student.year;
+
+                card.appendChild(title);
+                card.appendChild(email);
+                card.appendChild(course);
+                card.appendChild(year);
+                studentList.appendChild(card);
+            });
+
+            studentStatus.textContent = 'Showing ' + (startIndex + 1) + ' to ' + Math.min(startIndex + pageStudents.length, filteredStudents.length) + ' of ' + filteredStudents.length + ' students';
+            updateStudentPagination(totalPages);
+        }
+
+        function loadStudents() {
+            studentStatus.textContent = 'Loading students...';
+            studentList.innerHTML = '<div class="empty-state">Loading data...</div>';
+
+            fetch('../data/students.json')
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Failed to load students data.');
+                    }
+                    return response.json();
+                })
+                .then(function (data) {
+                    allStudents = data;
+                    currentStudentPage = 1;
+                    renderStudents();
+                })
+                .catch(function (error) {
+                    studentList.innerHTML = '<div class="empty-state">Unable to load students data right now.</div>';
+                    studentStatus.textContent = error.message || 'Something went wrong while loading students.';
+                });
+        }
+
+        studentSearch.addEventListener('input', function () {
+            currentStudentPage = 1;
+            renderStudents();
+        });
+
+        studentCourse.addEventListener('change', function () {
+            currentStudentPage = 1;
+            renderStudents();
+        });
+
+        studentYear.addEventListener('change', function () {
+            currentStudentPage = 1;
+            renderStudents();
+        });
+
+        studentSort.addEventListener('change', function () {
+            currentStudentPage = 1;
+            renderStudents();
+        });
+
+        studentPrev.addEventListener('click', function () {
+            if (currentStudentPage > 1) {
+                currentStudentPage -= 1;
+                renderStudents();
+            }
+        });
+
+        studentNext.addEventListener('click', function () {
+            const filteredStudents = getFilteredStudents();
+            const totalPages = Math.ceil(filteredStudents.length / studentItemsPerPage) || 1;
+            if (currentStudentPage < totalPages) {
+                currentStudentPage += 1;
+                renderStudents();
+            }
+        });
+
+        loadStudents();
+    </script>
+</body>
+</html>

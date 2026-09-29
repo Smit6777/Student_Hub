@@ -1,24 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ | StudentHub</title>
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .faq-tools {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .faq-tools input,
+        .faq-tools select {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .faq-item h3 {
+            color: #1d2b42;
+            margin-bottom: 10px;
+        }
+
+        .faq-item p {
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        .status-box {
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            color: #475569;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
     <script>if (localStorage.getItem("theme") === "dark") { document.documentElement.classList.add('dark-theme'); }</script>
 </head>
-
 <body>
-
-    <!-- Header -->
     <header>
         <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
         <h1>Frequently Asked Questions</h1>
         <p>Find Answers to Common Questions About StudentHub.</p>
     </header>
 
-    <!-- Navigation -->
     <nav>
         <button class="hamburger" aria-label="Toggle menu">☰</button>
         <div id="nav-links">
@@ -28,6 +99,7 @@
             <a href="login.html">Login</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="events.html">Events</a>
+            <a href="students.html">Students</a>
             <a href="profile.html">Profile</a>
             <a href="contact.html">Contact</a>
             <a href="admin.html">Admin</a>
@@ -38,145 +110,27 @@
     </nav>
 
     <main>
-
-        <!-- General Questions -->
         <section>
-            <h2>📌 General Questions</h2>
-
-            <div class="faq-item">
-                <button class="faq-question">What is StudentHub?</button>
-                <div class="faq-answer"><p>
-                    StudentHub is a digital campus portal created for students
-                    of CHARUSAT University. It provides a centralized platform
-                    to access academic information, register for events,
-                    manage profiles, and stay updated with campus activities.
-                </p></div>
+            <div class="faq-tools">
+                <input type="text" id="faqSearch" placeholder="🔍 Search FAQs by question...">
+                <select id="faqSort">
+                    <option value="az">Sort: A-Z</option>
+                    <option value="za">Sort: Z-A</option>
+                </select>
             </div>
 
-            <div class="faq-item">
-                <button class="faq-question">Who can use StudentHub?</button>
-                <div class="faq-answer"><p>
-                    StudentHub is designed for all students and administrators
-                    of CHARUSAT University. Students can register for an account,
-                    while administrators have special access to manage students
-                    and events.
-                </p></div>
-            </div>
+            <div id="faqStatus" class="status-box">Loading FAQs...</div>
+            <div id="faqList" class="faq-list"></div>
 
-            <div class="faq-item">
-                <button class="faq-question">Is StudentHub free to use?</button>
-                <div class="faq-answer"><p>
-                    Yes! StudentHub is completely free for all students.
-                    There are no charges for registration, event participation,
-                    or using any of the portal features.
-                </p></div>
+            <div class="pagination">
+                <button id="faqPrev" type="button">Previous</button>
+                <span id="faqPageInfo">Page 1</span>
+                <button id="faqNext" type="button">Next</button>
             </div>
         </section>
-
-        <!-- Account & Registration -->
-        <section>
-            <h2>👤 Account & Registration</h2>
-
-            <div class="faq-item">
-                <button class="faq-question">How do I register on StudentHub?</button>
-                <div class="faq-answer"><p>
-                    Go to the Register page, fill in your personal details
-                    including name, email, department, semester, and enrollment
-                    number, create a password, and click "Register Now".
-                    You can then log in with your credentials.
-                </p></div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">I forgot my password. What should I do?</button>
-                <div class="faq-answer"><p>
-                    Please contact the administrator through the Contact page
-                    or email us at smitmakwana6777@gmail.com. We will help you
-                    reset your password as soon as possible.
-                </p></div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">Can I update my profile information?</button>
-                <div class="faq-answer"><p>
-                    Yes! After logging in, go to the Profile page where you can
-                    view and update your personal information, contact details,
-                    and bio using the "Update Profile" form.
-                </p></div>
-            </div>
-        </section>
-
-        <!-- Events -->
-        <section>
-            <h2>🎉 Events</h2>
-
-            <div class="faq-item">
-                <button class="faq-question">How do I register for an event?</button>
-                <div class="faq-answer"><p>
-                    Visit the Events page to browse all available events.
-                    Each event has a "Register Now" button if registration
-                    is open. Click it to register for the event.
-                </p></div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">Can I cancel my event registration?</button>
-                <div class="faq-answer"><p>
-                    Currently, event cancellations need to be done through
-                    the administrator. Please reach out via the Contact page
-                    or email us with your enrollment number and the event
-                    name you wish to cancel.
-                </p></div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">Will I get a certificate for attending events?</button>
-                <div class="faq-answer"><p>
-                    Yes! Certificates are provided for workshops and hackathons.
-                    After the event, certificates will be available through
-                    your student dashboard.
-                </p></div>
-            </div>
-        </section>
-
-        <!-- Technical -->
-        <section>
-            <h2>🔧 Technical</h2>
-
-            <div class="faq-item">
-                <button class="faq-question">Which browsers are supported?</button>
-                <div class="faq-answer"><p>
-                    StudentHub works on all modern browsers including
-                    Google Chrome, Mozilla Firefox, Microsoft Edge, and Safari.
-                    We recommend using the latest version of your browser.
-                </p></div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">Is StudentHub mobile-friendly?</button>
-                <div class="faq-answer"><p>
-                    Yes! StudentHub is fully responsive and works on
-                    mobile phones, tablets, and desktops.
-                </p></div>
-            </div>
-        </section>
-
-        <!-- Still have questions? -->
-        <aside>
-            <h2>💬 Still Have Questions?</h2>
-            <p>
-                Can't find what you're looking for? Reach out to us directly
-                through our <a href="contact.html">Contact page</a>.
-            </p>
-        </aside>
-
     </main>
 
-    <!-- Footer -->
     <footer>
-
-    <script src="../javascripts/scripts.js"></script>
-
         <div class="footer-container">
             <div class="footer-section">
                 <h2>🎓 StudentHub</h2>
@@ -200,6 +154,135 @@
         <p class="copyright">&copy; 2026 StudentHub | Designed by Smit Makwana</p>
     </footer>
 
-</body>
+    <script src="../javascripts/scripts.js"></script>
+    <script>
+        const faqPerPage = 5;
+        let allFAQs = [];
+        let currentFaqPage = 1;
 
+        const faqSearch = document.getElementById('faqSearch');
+        const faqSort = document.getElementById('faqSort');
+        const faqList = document.getElementById('faqList');
+        const faqStatus = document.getElementById('faqStatus');
+        const faqPrev = document.getElementById('faqPrev');
+        const faqNext = document.getElementById('faqNext');
+        const faqPageInfo = document.getElementById('faqPageInfo');
+
+        function updateFaqPagination(totalPages) {
+            faqPrev.disabled = currentFaqPage <= 1;
+            faqNext.disabled = currentFaqPage >= totalPages;
+            faqPageInfo.textContent = 'Page ' + currentFaqPage + ' of ' + totalPages;
+        }
+
+        function getFilteredFaqs() {
+            let result = [...allFAQs];
+            const searchText = faqSearch.value.trim().toLowerCase();
+            const sortValue = faqSort.value;
+
+            if (searchText !== '') {
+                result = result.filter(function (faq) {
+                    return faq.question.toLowerCase().includes(searchText);
+                });
+            }
+
+            if (sortValue === 'az') {
+                result.sort(function (a, b) {
+                    return a.question.localeCompare(b.question);
+                });
+            } else if (sortValue === 'za') {
+                result.sort(function (a, b) {
+                    return b.question.localeCompare(a.question);
+                });
+            }
+
+            return result;
+        }
+
+        function renderFAQs() {
+            const filteredFaqs = getFilteredFaqs();
+            const totalPages = Math.ceil(filteredFaqs.length / faqPerPage) || 1;
+            currentFaqPage = Math.min(currentFaqPage, totalPages);
+
+            const startIndex = (currentFaqPage - 1) * faqPerPage;
+            const pageFaqs = filteredFaqs.slice(startIndex, startIndex + faqPerPage);
+
+            faqList.innerHTML = '';
+
+            if (pageFaqs.length === 0) {
+                faqList.innerHTML = '<div class="empty-state">No FAQs found.</div>';
+                faqStatus.textContent = 'No FAQs found for the current search.';
+                updateFaqPagination(1);
+                return;
+            }
+
+            pageFaqs.forEach(function (faq) {
+                const item = document.createElement('div');
+                item.className = 'faq-item';
+
+                const title = document.createElement('h3');
+                title.textContent = faq.question;
+
+                const answer = document.createElement('p');
+                answer.textContent = faq.answer;
+
+                item.appendChild(title);
+                item.appendChild(answer);
+                faqList.appendChild(item);
+            });
+
+            faqStatus.textContent = 'Showing ' + (startIndex + 1) + ' to ' + Math.min(startIndex + pageFaqs.length, filteredFaqs.length) + ' of ' + filteredFaqs.length + ' FAQs';
+            updateFaqPagination(totalPages);
+        }
+
+        function loadFaqs() {
+            faqStatus.textContent = 'Loading FAQs...';
+            faqList.innerHTML = '<div class="empty-state">Loading data...</div>';
+
+            fetch('../data/faqs.json')
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Failed to load FAQs data.');
+                    }
+                    return response.json();
+                })
+                .then(function (data) {
+                    allFAQs = data;
+                    currentFaqPage = 1;
+                    renderFAQs();
+                })
+                .catch(function (error) {
+                    faqList.innerHTML = '<div class="empty-state">Unable to load FAQs data right now.</div>';
+                    faqStatus.textContent = error.message || 'Something went wrong while loading FAQs.';
+                });
+        }
+
+        faqSearch.addEventListener('input', function () {
+            currentFaqPage = 1;
+            renderFAQs();
+        });
+
+        faqSort.addEventListener('change', function () {
+            currentFaqPage = 1;
+            renderFAQs();
+        });
+
+        faqPrev.addEventListener('click', function () {
+            if (currentFaqPage > 1) {
+                currentFaqPage -= 1;
+                renderFAQs();
+            }
+        });
+
+        faqNext.addEventListener('click', function () {
+            const filteredFaqs = getFilteredFaqs();
+            const totalPages = Math.ceil(filteredFaqs.length / faqPerPage) || 1;
+            if (currentFaqPage < totalPages) {
+                currentFaqPage += 1;
+                renderFAQs();
+            }
+        });
+
+        loadFaqs();
+    </script>
+</body>
 </html>
