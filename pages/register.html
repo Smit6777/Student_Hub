@@ -121,7 +121,7 @@
         <div class="register-wrapper">
             <h2>📝 Create Your Account</h2>
 
-            <form id="studentForm" action="../php/process_registration.php" method="post" novalidate>
+            <form id="studentForm" action="../php/process_registration.php" method="POST" novalidate>
                 <div class="form-group">
                     <label for="studentName">Name</label>
                     <input type="text" id="studentName" name="studentName" placeholder="Enter your full name">
@@ -195,6 +195,9 @@
                 </div>
 
                 <button type="submit" class="btn-register">Register</button>
+                <div style="text-align: center; margin-top: 15px;">
+                    <a href="../php/view_registrations.php" style="color: #2563eb; text-decoration: none; font-weight: 600;">View all registrations</a>
+                </div>
             </form>
         </div>
     </main>
