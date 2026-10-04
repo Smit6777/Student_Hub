@@ -121,7 +121,7 @@
         <div class="register-wrapper">
             <h2>📝 Create Your Account</h2>
 
-            <form id="studentForm" action="../php/process_registration.php" method="POST" novalidate>
+            <form id="studentForm" action="../php/process_registration_db.php" method="POST" novalidate>
                 <div class="form-group">
                     <label for="studentName">Name</label>
                     <input type="text" id="studentName" name="studentName" placeholder="Enter your full name">
@@ -156,10 +156,10 @@
                     <label for="course">Course</label>
                     <select id="course" name="course">
                         <option value="">Select a course</option>
-                        <option value="BCA">BCA</option>
-                        <option value="BSc">BSc</option>
-                        <option value="BTech">BTech</option>
-                        <option value="MBA">MBA</option>
+                        <option value="1">BCA</option>
+                        <option value="2">BSc</option>
+                        <option value="3">BTech</option>
+                        <option value="4">MBA</option>
                     </select>
                     <span id="courseError" class="error"></span>
                 </div>
