@@ -1,64 +1,48 @@
 <?php
-// ============================================================================
-// process_user_registration.php - Secure Registration Backend with MySQLi
-// ============================================================================
-
-// Step 1: Include the MySQLi database connection file
 require_once "db_connect_mysqli.php";
 
-// Initialize message container variables
 $status_type = "";
 $message     = "";
 
-// Step 2: Check if form was submitted via POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    // Step 3: Capture and sanitize user inputs
+    // 1. Sanitize user inputs
     $name     = isset($_POST["name"]) ? trim($_POST["name"]) : "";
     $email    = isset($_POST["email"]) ? trim($_POST["email"]) : "";
     $password = isset($_POST["password"]) ? $_POST["password"] : "";
 
-    // Step 4: Backend Input Validation
-    // Case 1: Check for empty / missing fields
+    // 2. Server-side validation
     if (empty($name) || empty($email) || empty($password)) {
         $status_type = "error";
         $message     = "All fields (Name, Email, Password) are required.";
-    }
-    // Case 2: Validate email format using PHP filter
-    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $status_type = "error";
         $message     = "Invalid email format. Please provide a valid email address.";
-    }
-    // Case 3: Enforce minimum password length (at least 6 characters)
-    elseif (strlen($password) < 6) {
+    } elseif (strlen($password) < 6) {
         $status_type = "error";
         $message     = "Weak password! Password must contain at least 6 characters.";
-    }
-    else {
-        // Step 5: Check for duplicate email using Prepared Statements
+    } else {
+        // 3. Check for duplicate email using Prepared Statement
         $check_sql  = "SELECT id FROM users WHERE email = ?";
         $check_stmt = $conn->prepare($check_sql);
 
         if ($check_stmt) {
-            // Bind the email parameter ("s" = string)
             $check_stmt->bind_param("s", $email);
             $check_stmt->execute();
             $check_stmt->store_result();
 
-            // Check if any matching user record exists
             if ($check_stmt->num_rows > 0) {
                 $status_type = "error";
                 $message     = "Duplicate Email! This email is already registered.";
             } else {
-                // Step 6: Hash password securely using PHP's native password_hash()
+                // 4. Securely hash password before storing
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-                // Step 7: Insert new user record using Prepared Statements
+                // 5. Insert new user using Prepared Statement
                 $insert_sql  = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
                 $insert_stmt = $conn->prepare($insert_sql);
 
                 if ($insert_stmt) {
-                    // Bind parameters: 3 strings ("sss")
                     $insert_stmt->bind_param("sss", $name, $email, $hashed_password);
 
                     if ($insert_stmt->execute()) {
@@ -68,28 +52,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $status_type = "error";
                         $message     = "Database insertion failed: " . $insert_stmt->error;
                     }
-
-                    // Close the insert statement
                     $insert_stmt->close();
                 } else {
                     $status_type = "error";
                     $message     = "Failed to prepare insert query: " . $conn->error;
                 }
             }
-
-            // Close the check statement
             $check_stmt->close();
         } else {
             $status_type = "error";
-            $message     = "Failed to prepare email verification query: " . $conn->error;
+            $message     = "Failed to prepare check query: " . $conn->error;
         }
     }
 
-    // Close the database connection
     $conn->close();
 
 } else {
-    // If accessed directly without submitting the form
     header("Location: ../pages/register_user.html");
     exit();
 }

@@ -1,22 +1,18 @@
 <?php
-// ============================================================================
-// db_connect_mysqli.php - MySQLi Database Connection (Object-Oriented)
-// ============================================================================
-
-// Step 1: Database configuration credentials
+// Database configuration
 $host     = "localhost";
 $username = "root";
 $password = "";
 $dbname   = "studenthub";
 
-// Step 2: Create a new MySQLi connection instance (Object-Oriented style)
+// Create MySQLi connection (Object-Oriented)
 $conn = new mysqli($host, $username, $password, $dbname);
 
-// Step 3: Verify the connection
+// Check database connection
 if ($conn->connect_error) {
     die("Database connection failed: " . $conn->connect_error);
 }
 
-// Step 4: Set charset to utf8mb4 for proper character encoding
+// Set charset to utf8mb4 for unicode support
 $conn->set_charset("utf8mb4");
 ?>

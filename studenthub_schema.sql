@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS students (
         ON UPDATE RESTRICT
 );
 
--- ADDED BY AGENT: Event tables as requested by instructor
+-- Events table
 CREATE TABLE IF NOT EXISTS events (
     event_id INT(11) NOT NULL AUTO_INCREMENT,
     title VARCHAR(150) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS event_registrations (
     FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE
 );
 
--- Practical 9: Users table for secure registration with MySQLi
+-- Users table
 CREATE TABLE IF NOT EXISTS users (
     id INT(11) NOT NULL AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,

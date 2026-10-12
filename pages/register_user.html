@@ -73,7 +73,6 @@
         }
     </style>
     <script>
-        // Maintain dark theme preference if set
         if (localStorage.getItem("theme") === "dark") {
             document.documentElement.classList.add('dark-theme');
         }
@@ -81,14 +80,12 @@
 </head>
 <body>
 
-    <!-- Header Section -->
     <header>
         <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
         <h1>User Registration</h1>
         <p>Create your secure account for StudentHub.</p>
     </header>
 
-    <!-- Navigation Bar -->
     <nav>
         <button class="hamburger" aria-label="Toggle menu">☰</button>
         <div id="nav-links">
@@ -104,7 +101,6 @@
         </div>
     </nav>
 
-    <!-- Main Registration Form -->
     <main>
         <div class="register-container">
             <h2>📝 Create Account</h2>
@@ -112,52 +108,28 @@
 
             <form action="../php/process_user_registration.php" method="POST">
                 
-                <!-- Full Name Field -->
                 <div class="form-group">
                     <label for="name">Full Name</label>
-                    <input 
-                        type="text" 
-                        id="name" 
-                        name="name" 
-                        placeholder="e.g. Smit Makwana" 
-                        required 
-                    >
+                    <input type="text" id="name" name="name" placeholder="e.g. Smit Makwana" required>
                 </div>
 
-                <!-- Email Field with HTML5 Email Validation -->
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        placeholder="e.g. user@example.com" 
-                        required 
-                    >
+                    <input type="email" id="email" name="email" placeholder="e.g. user@example.com" required>
                 </div>
 
-                <!-- Password Field with Minimum Length Validation -->
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        placeholder="Enter secure password" 
-                        minlength="6" 
-                        required 
-                    >
+                    <input type="password" id="password" name="password" placeholder="Enter secure password" minlength="6" required>
                     <small>Must be at least 6 characters long.</small>
                 </div>
 
-                <!-- Submit Button -->
                 <button type="submit" class="btn-submit">🚀 Register</button>
 
             </form>
         </div>
     </main>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-container">
             <div class="footer-section">
