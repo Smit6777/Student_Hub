@@ -53,3 +53,13 @@ CREATE TABLE IF NOT EXISTS event_registrations (
     FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
     FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE
 );
+
+-- Practical 9: Users table for secure registration with MySQLi
+CREATE TABLE IF NOT EXISTS users (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
