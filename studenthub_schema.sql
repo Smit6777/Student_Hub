@@ -60,6 +60,16 @@ CREATE TABLE IF NOT EXISTS users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
+    role VARCHAR(20) NOT NULL DEFAULT 'student',
+    remember_token VARCHAR(255) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 );
+
+-- Default Admin and Student accounts for testing
+-- Admin password: Admin@123
+-- Student password: Student@123
+INSERT INTO users (id, name, email, password, role) VALUES 
+(1, 'Admin User', 'admin@studenthub.com', '$2y$10$4GgTmP7MZY6Exln3VQFsjuN2tNAmwqDZx5Q//DyZ/dOriykOKQTGS', 'admin'),
+(2, 'Smit Makwana', 'student@studenthub.com', '$2y$10$3uICpgQOpanhyo2P2UM0fe7gK0QiVu/T26z3XS7NRtfVOUpaWEyWi', 'student')
+ON DUPLICATE KEY UPDATE role = VALUES(role);
