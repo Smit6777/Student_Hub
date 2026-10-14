@@ -29,6 +29,15 @@ CREATE TABLE IF NOT EXISTS students (
         ON UPDATE RESTRICT
 );
 
+-- Sample student records for CRUD testing
+INSERT INTO students (id, name, email, mobile, course_id, year, gender) VALUES
+(1, 'Smit Makwana', 'smit.makwana@studenthub.com', '9998403012', 1, 2, 'Male'),
+(2, 'Priya Patel', 'priya.patel@example.com', '9876543210', 2, 3, 'Female'),
+(3, 'Rahul Shah', 'rahul.shah@example.com', '9898123456', 3, 1, 'Male'),
+(4, 'Ananya Sharma', 'ananya.s@example.com', '9723456789', 1, 4, 'Female'),
+(5, 'Harsh Mehta', 'harsh.mehta@example.com', '9638527410', 2, 2, 'Male')
+ON DUPLICATE KEY UPDATE name=VALUES(name);
+
 -- Events table
 CREATE TABLE IF NOT EXISTS events (
     event_id INT(11) NOT NULL AUTO_INCREMENT,

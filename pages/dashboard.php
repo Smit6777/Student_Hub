@@ -149,8 +149,8 @@ $forbidden_msg = (isset($_GET["error"]) && $_GET["error"] === "forbidden") ? "Ac
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="dashboard.php">Dashboard</a>
+            <a href="students.php">Students</a>
             <a href="events.html">Events</a>
-            <a href="students.html">Students</a>
             <a href="contact.html">Contact</a>
             <a href="../php/logout.php" style="color: #f87171; font-weight: bold;">Logout</a>
             <button id="theme-toggle" style="margin-left: 10px; padding: 8px 14px; font-weight: 600;">🌙 Dark Mode</button>

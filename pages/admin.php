@@ -165,7 +165,7 @@ $conn->close();
         <div id="nav-links">
             <a href="index.html">Home</a>
             <a href="admin.php">Admin Panel</a>
-            <a href="students.html">Students</a>
+            <a href="students.php">Students</a>
             <a href="events.html">Events</a>
             <a href="../php/logout.php" style="color: #f87171; font-weight: bold;">Logout</a>
             <button id="theme-toggle" style="margin-left: 10px; padding: 8px 14px; font-weight: 600;">🌙 Dark Mode</button>
