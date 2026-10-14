@@ -77,9 +77,7 @@ CREATE TABLE IF NOT EXISTS users (
     PRIMARY KEY (id)
 );
 
--- Default Admin and Student accounts for testing
--- Admin password: Admin@123
--- Student password: Student@123
+-- Default Admin and Student accounts (passwords are securely hashed with BCRYPT)
 INSERT INTO users (id, name, email, password, role) VALUES 
 (1, 'Admin User', 'admin@studenthub.com', '$2y$10$4GgTmP7MZY6Exln3VQFsjuN2tNAmwqDZx5Q//DyZ/dOriykOKQTGS', 'admin'),
 (2, 'Smit Makwana', 'student@studenthub.com', '$2y$10$3uICpgQOpanhyo2P2UM0fe7gK0QiVu/T26z3XS7NRtfVOUpaWEyWi', 'student')

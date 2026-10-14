@@ -472,7 +472,7 @@ $error = $_GET["error"] ?? "";
                                     <td style="text-align: center;">
                                         <div class="actions" style="justify-content: center;">
                                             <a href="student_edit.php?id=<?php echo $s['id']; ?>" class="btn-edit">✏️ Edit</a>
-                                            <!-- Delete confirmation alert (Answers Key Question 3) -->
+                                            <!-- Delete confirmation alert -->
                                             <a 
                                                 href="../php/student_delete.php?id=<?php echo $s['id']; ?>" 
                                                 class="btn-delete" 

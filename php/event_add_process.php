@@ -25,13 +25,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $file_size  = $_FILES["poster"]["size"];
         $max_size   = 2 * 1024 * 1024; // 2MB limit
 
-        // A. File Size Validation (Answers Key Question 3)
+        // A. File Size Validation
         if ($file_size > $max_size) {
             header("Location: ../pages/event_add.php?error=file_size");
             exit();
         }
 
-        // B. File Type and MIME Validation (Answers Key Question 3)
+        // B. File Type and MIME Validation
         $allowed_exts  = ["jpg", "jpeg", "png", "webp"];
         $allowed_mimes = ["image/jpeg", "image/png", "image/webp"];
 

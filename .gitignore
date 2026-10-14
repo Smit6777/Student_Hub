@@ -1,0 +1,42 @@
+# ==========================================
+# StudentHub - Git Ignore Configuration
+# Protects sensitive keys, credentials & uploads from GitHub
+# ==========================================
+
+# 1. Environment & API Key Configuration files (NEVER commit to GitHub)
+.env
+.env.local
+.env.*.local
+*.env
+config.local.php
+secrets.json
+credentials.json
+
+# 2. Uploaded user files & media (keep folder structure with .gitkeep)
+uploads/*
+!uploads/.gitkeep
+
+# 3. Log files & error logs
+*.log
+error_log
+php_errors.log
+logs/
+
+# 4. Database backups & sensitive exports
+backups/
+*.bak
+*.dump
+backup_*.sql
+
+# 5. OS and IDE generated files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+nbproject/
+*.sublime-project
+*.sublime-workspace
+
+# 6. Dependency directories
+vendor/
+node_modules/
