@@ -133,14 +133,14 @@ $error = $_GET["error"] ?? "";
 
     <header>
         <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
-        <h1>Student Registration</h1>
-        <p>Add a new student record to the MySQL database.</p>
+        <h1>Add New Student</h1>
+        <p>Enter student details to add them to the directory.</p>
     </header>
 
     <main>
         <div class="form-container">
-            <h2>➕ Add New Student Record</h2>
-            <p class="subtitle">Fill out student academic details below to insert a new record.</p>
+            <h2>➕ Add Student</h2>
+            <p class="subtitle">Enter the student's academic details below.</p>
 
             <?php if (!empty($error)): ?>
                 <div class="alert-error">

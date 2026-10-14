@@ -152,14 +152,14 @@ $error = $_GET["error"] ?? "";
 
     <header>
         <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
-        <h1>Edit Student Record</h1>
-        <p>Modify existing student details in the MySQL database.</p>
+        <h1>Edit Student Details</h1>
+        <p>Update student details and enrollment information.</p>
     </header>
 
     <main>
         <div class="form-container">
-            <h2>✏️ Update Student #<?php echo htmlspecialchars($student["id"]); ?></h2>
-            <p class="subtitle">Modify the fields below and save changes to update the database record.</p>
+            <h2>✏️ Edit Student #<?php echo htmlspecialchars($student["id"]); ?></h2>
+            <p class="subtitle">Update the student information below and save your changes.</p>
 
             <?php if (!empty($error)): ?>
                 <div class="alert-error">

@@ -356,8 +356,8 @@ $error = $_GET["error"] ?? "";
 
     <header>
         <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
-        <h1>StudentHub Records</h1>
-        <p>Student Management Module &mdash; Complete MySQLi CRUD Operations</p>
+        <h1>Student Directory</h1>
+        <p>Browse, search, and manage registered campus students.</p>
     </header>
 
     <nav>

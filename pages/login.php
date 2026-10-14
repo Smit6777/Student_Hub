@@ -176,7 +176,7 @@ if (isset($_GET["msg"]) && $_GET["msg"] === "logged_out") {
     <header>
         <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
         <h1>StudentHub Login</h1>
-        <p>Access your StudentHub account with secure PHP sessions.</p>
+        <p>Welcome back! Please login to your account.</p>
     </header>
 
     <nav>

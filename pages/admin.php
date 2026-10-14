@@ -157,7 +157,7 @@ $conn->close();
     <header>
         <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
         <h1>⚙️ Administrator Control Panel</h1>
-        <p>Restricted Role-Based Administrative Management.</p>
+        <p>Manage campus portal users, events, and records.</p>
     </header>
 
     <nav>
@@ -166,7 +166,7 @@ $conn->close();
             <a href="index.html">Home</a>
             <a href="admin.php">Admin Panel</a>
             <a href="students.php">Students</a>
-            <a href="events.html">Events</a>
+            <a href="events_manage.php">Events</a>
             <a href="../php/logout.php" style="color: #f87171; font-weight: bold;">Logout</a>
             <button id="theme-toggle" style="margin-left: 10px; padding: 8px 14px; font-weight: 600;">🌙 Dark Mode</button>
         </div>
@@ -182,7 +182,7 @@ $conn->close();
                 <p style="color: #64748b; margin: 0;">Session Email: <strong><?php echo $admin_email; ?></strong> | Last Active: <?php echo $last_active; ?></p>
             </div>
             <div>
-                <a href="../php/logout.php" class="btn-logout">🚪 Secure Logout</a>
+                <a href="../php/logout.php" class="btn-logout">🚪 Logout</a>
             </div>
         </div>
 
@@ -193,12 +193,12 @@ $conn->close();
                 <h3><?php echo $total_users; ?></h3>
             </div>
             <div class="stat-card" style="border-left-color: #16a34a;">
-                <p>Role Security</p>
-                <h3 style="font-size: 20px; color: #16a34a; margin-top: 10px;">Role-Based Access</h3>
+                <p>System Status</p>
+                <h3 style="font-size: 20px; color: #16a34a; margin-top: 10px;">Active</h3>
             </div>
             <div class="stat-card" style="border-left-color: #f59e0b;">
-                <p>Session Guard</p>
-                <h3 style="font-size: 20px; color: #f59e0b; margin-top: 10px;">15m Inactivity Lock</h3>
+                <p>Inactivity Limit</p>
+                <h3 style="font-size: 20px; color: #f59e0b; margin-top: 10px;">15 Minutes</h3>
             </div>
         </div>
 

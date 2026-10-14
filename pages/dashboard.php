@@ -140,7 +140,7 @@ $forbidden_msg = (isset($_GET["error"]) && $_GET["error"] === "forbidden") ? "Ac
     <header>
         <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
         <h1>🎓 Student Dashboard</h1>
-        <p>Protected Student Portal with PHP Session Management.</p>
+        <p>Welcome to your student portal and academic hub.</p>
     </header>
 
     <nav>
@@ -169,25 +169,25 @@ $forbidden_msg = (isset($_GET["error"]) && $_GET["error"] === "forbidden") ? "Ac
                 <p style="color: #64748b; margin: 0;">Logged in as: <strong><?php echo $user_email; ?></strong></p>
             </div>
             <div>
-                <a href="../php/logout.php" class="btn-logout">🚪 Secure Logout</a>
+                <a href="../php/logout.php" class="btn-logout">🚪 Logout</a>
             </div>
         </div>
 
-        <!-- Session & Security Details (Proves Practical 10 implementation) -->
+        <!-- Account Details -->
         <div class="session-info-card">
-            <h3>🔒 Active Session Security & Timeout Monitor</h3>
+            <h3>👤 Account & Session Details</h3>
             <div class="session-grid">
                 <div class="session-item">
-                    <small>Authentication Status</small>
-                    <strong style="color: #16a34a;">Active Session</strong>
+                    <small>Status</small>
+                    <strong style="color: #16a34a;">Active</strong>
                 </div>
                 <div class="session-item">
                     <small>User Role</small>
                     <strong><?php echo $user_role; ?></strong>
                 </div>
                 <div class="session-item">
-                    <small>Session Inactivity Timeout</small>
-                    <strong>15 Minutes (900s)</strong>
+                    <small>Session Inactivity Limit</small>
+                    <strong>15 Minutes</strong>
                 </div>
                 <div class="session-item">
                     <small>Last Active Time</small>

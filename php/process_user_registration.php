@@ -143,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <header>
         <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
         <h1>Registration Status</h1>
-        <p>PHP + MySQLi Secure Authentication Feedback</p>
+        <p>StudentHub Account Registration</p>
     </header>
 
     <main>

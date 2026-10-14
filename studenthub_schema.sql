@@ -45,6 +45,8 @@ CREATE TABLE IF NOT EXISTS events (
     event_date DATE NOT NULL,
     location VARCHAR(100) NOT NULL,
     category VARCHAR(50) NOT NULL,
+    poster VARCHAR(255) DEFAULT NULL,
+    description TEXT DEFAULT NULL,
     PRIMARY KEY (event_id)
 );
 
