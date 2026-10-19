@@ -1,17 +1,13 @@
 <?php
-// Set response header to application/json
 header("Content-Type: application/json; charset=utf-8");
 
 require_once __DIR__ . "/../php/db_connect_mysqli.php";
+require_once __DIR__ . "/../php/audit_logger.php";
 
 $method = $_SERVER["REQUEST_METHOD"];
 
-// ==========================================
-// 1. GET Requests: Read Records (List / Single / Courses)
-// ==========================================
 if ($method === "GET") {
 
-    // Return courses list for dropdowns
     if (isset($_GET["type"]) && $_GET["type"] === "courses") {
         $courses = [];
         $res = $conn->query("SELECT course_id, course_name FROM courses ORDER BY course_name ASC");
@@ -25,7 +21,6 @@ if ($method === "GET") {
         exit();
     }
 
-    // Return single student by ID
     if (isset($_GET["id"])) {
         $id = filter_var($_GET["id"], FILTER_VALIDATE_INT);
         if (!$id || $id <= 0) {
@@ -55,7 +50,6 @@ if ($method === "GET") {
         exit();
     }
 
-    // Return all students
     $sql = "SELECT s.id, s.name, s.email, s.mobile, s.course_id, c.course_name, s.year, s.gender 
             FROM students s 
             LEFT JOIN courses c ON s.course_id = c.course_id 
@@ -78,12 +72,8 @@ if ($method === "GET") {
     exit();
 }
 
-// ==========================================
-// 2. POST Requests: Add, Update, and Delete
-// ==========================================
 if ($method === "POST") {
 
-    // Read POST parameters (from FormData or JSON)
     $input = $_POST;
     if (empty($input)) {
         $raw = file_get_contents("php://input");
@@ -95,7 +85,6 @@ if ($method === "POST") {
 
     $action = $input["action"] ?? $_GET["action"] ?? "";
 
-    // Action: Add Student
     if ($action === "add") {
         $name      = trim($input["name"] ?? "");
         $email     = trim($input["email"] ?? "");
@@ -123,6 +112,7 @@ if ($method === "POST") {
 
         if ($stmt->execute()) {
             $new_id = $conn->insert_id;
+            log_audit($conn, "API Add Student", "Created student: " . $name . " (ID: " . $new_id . ")");
             $stmt->close();
             $conn->close();
             echo json_encode([
@@ -139,7 +129,6 @@ if ($method === "POST") {
         exit();
     }
 
-    // Action: Update Student
     if ($action === "update") {
         $id        = filter_var($input["id"] ?? null, FILTER_VALIDATE_INT);
         $name      = trim($input["name"] ?? "");
@@ -167,6 +156,7 @@ if ($method === "POST") {
         $stmt->bind_param("sssissi", $name, $email, $mobile, $course_id, $year, $gender, $id);
 
         if ($stmt->execute()) {
+            log_audit($conn, "API Update Student", "Updated student: " . $name . " (ID: " . $id . ")");
             $stmt->close();
             $conn->close();
             echo json_encode([
@@ -182,7 +172,6 @@ if ($method === "POST") {
         exit();
     }
 
-    // Action: Delete Student
     if ($action === "delete") {
         $id = filter_var($input["id"] ?? null, FILTER_VALIDATE_INT);
 
@@ -197,6 +186,7 @@ if ($method === "POST") {
         $stmt->bind_param("i", $id);
 
         if ($stmt->execute()) {
+            log_audit($conn, "API Delete Student", "Deleted student ID: " . $id);
             $stmt->close();
             $conn->close();
             echo json_encode([
@@ -218,7 +208,6 @@ if ($method === "POST") {
     exit();
 }
 
-// Any other HTTP method
 http_response_code(405);
 echo json_encode(["status" => "error", "message" => "Method not allowed"]);
 $conn->close();

@@ -449,18 +449,15 @@
         <p>&copy; 2026 StudentHub | Designed by Smit Makwana</p>
     </footer>
 
-    <!-- Fetch API AJAX CRUD Script -->
     <script>
         const API_URL = "../api/students_api.php";
         let coursesCache = [];
 
-        // 1. Initial Load: Fetch courses and students on page load
         document.addEventListener("DOMContentLoaded", () => {
             loadCourses();
             loadStudents();
         });
 
-        // Show live notification message (Success or Error State)
         function showAlert(message, type = "success") {
             const container = document.getElementById("alert-container");
             const alertClass = (type === "success") ? "alert-success" : "alert-danger";
@@ -469,13 +466,11 @@
             container.innerHTML = `<div class="alert ${alertClass}">${icon} ${message}</div>`;
             container.style.display = "block";
 
-            // Auto-hide alert after 4 seconds
             setTimeout(() => {
                 container.style.display = "none";
             }, 4000);
         }
 
-        // Fetch courses for the dropdown
         async function loadCourses() {
             try {
                 const response = await fetch(`${API_URL}?type=courses`);
@@ -491,7 +486,6 @@
             }
         }
 
-        // 2. GET Request: Load and render students table (Loading State -> Success/Error)
         async function loadStudents() {
             const loadingElem = document.getElementById("loading");
             const tableCard   = document.getElementById("table-card");
@@ -541,7 +535,6 @@
             }
         }
 
-        // Open Add Modal
         function openAddModal() {
             document.getElementById("student-form").reset();
             document.getElementById("student_id").value = "";
@@ -551,7 +544,6 @@
             document.getElementById("student-modal").style.display = "flex";
         }
 
-        // 3. GET Request: Load single student for Edit Modal
         async function openEditModal(id) {
             try {
                 const response = await fetch(`${API_URL}?id=${id}`);
@@ -583,7 +575,6 @@
             document.getElementById("student-modal").style.display = "none";
         }
 
-        // 4. POST Request: Add or Update student asynchronously without page reload
         async function handleFormSubmit(event) {
             event.preventDefault();
             const form = document.getElementById("student-form");
@@ -605,7 +596,7 @@
                 if (result.status === "success") {
                     closeModal();
                     showAlert(result.message, "success");
-                    loadStudents(); // Refresh table without reloading page
+                    loadStudents();
                 } else {
                     showAlert(result.message || "Operation failed", "error");
                 }
@@ -615,7 +606,6 @@
             }
         }
 
-        // 5. POST Request: Delete student asynchronously without page reload
         async function deleteStudent(id, name) {
             if (!confirm(`Are you sure you want to delete ${name}? This action cannot be undone.`)) {
                 return;
@@ -634,7 +624,7 @@
 
                 if (result.status === "success") {
                     showAlert(result.message, "success");
-                    loadStudents(); // Refresh table without reloading page
+                    loadStudents();
                 } else {
                     showAlert(result.message || "Failed to delete student", "error");
                 }

@@ -7,7 +7,6 @@ if (!$id || $id <= 0) {
     exit();
 }
 
-// Fetch event details using Prepared Statement
 $stmt = $conn->prepare("SELECT event_id, title, event_date, location, category, poster, description FROM events WHERE event_id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();

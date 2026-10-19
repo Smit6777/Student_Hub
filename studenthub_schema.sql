@@ -29,7 +29,6 @@ CREATE TABLE IF NOT EXISTS students (
         ON UPDATE RESTRICT
 );
 
--- Sample student records for CRUD testing
 INSERT INTO students (id, name, email, mobile, course_id, year, gender) VALUES
 (1, 'Smit Makwana', 'smit.makwana@studenthub.com', '9998403012', 1, 2, 'Male'),
 (2, 'Priya Patel', 'priya.patel@example.com', '9876543210', 2, 3, 'Female'),
@@ -38,7 +37,6 @@ INSERT INTO students (id, name, email, mobile, course_id, year, gender) VALUES
 (5, 'Harsh Mehta', 'harsh.mehta@example.com', '9638527410', 2, 2, 'Male')
 ON DUPLICATE KEY UPDATE name=VALUES(name);
 
--- Events table
 CREATE TABLE IF NOT EXISTS events (
     event_id INT(11) NOT NULL AUTO_INCREMENT,
     title VARCHAR(150) NOT NULL,
@@ -65,7 +63,6 @@ CREATE TABLE IF NOT EXISTS event_registrations (
     FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE
 );
 
--- Users table
 CREATE TABLE IF NOT EXISTS users (
     id INT(11) NOT NULL AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
@@ -77,8 +74,19 @@ CREATE TABLE IF NOT EXISTS users (
     PRIMARY KEY (id)
 );
 
--- Default Admin and Student accounts (passwords are securely hashed with BCRYPT)
 INSERT INTO users (id, name, email, password, role) VALUES 
 (1, 'Admin User', 'admin@studenthub.com', '$2y$10$4GgTmP7MZY6Exln3VQFsjuN2tNAmwqDZx5Q//DyZ/dOriykOKQTGS', 'admin'),
 (2, 'Smit Makwana', 'student@studenthub.com', '$2y$10$3uICpgQOpanhyo2P2UM0fe7gK0QiVu/T26z3XS7NRtfVOUpaWEyWi', 'student')
 ON DUPLICATE KEY UPDATE role = VALUES(role);
+
+CREATE TABLE IF NOT EXISTS audit_logs (
+    log_id INT(11) NOT NULL AUTO_INCREMENT,
+    user_id INT(11) DEFAULT NULL,
+    user_name VARCHAR(100) DEFAULT NULL,
+    action VARCHAR(100) NOT NULL,
+    details TEXT DEFAULT NULL,
+    ip_address VARCHAR(45) DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (log_id)
+);
+

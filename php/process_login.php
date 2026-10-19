@@ -1,5 +1,6 @@
 <?php
 require_once "db_connect_mysqli.php";
+require_once "audit_logger.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -7,13 +8,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password    = $_POST["password"] ?? "";
     $remember_me = isset($_POST["remember_me"]);
 
-    // 1. Basic validation
     if (empty($email) || empty($password)) {
         header("Location: ../pages/login.php?error=empty");
         exit();
     }
 
-    // 2. Fetch user by email using Prepared Statement
     $sql  = "SELECT id, name, email, password, role FROM users WHERE email = ?";
     $stmt = $conn->prepare($sql);
 
@@ -24,21 +23,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if ($user = $result->fetch_assoc()) {
 
-            // 3. Verify hashed password
             if (password_verify($password, $user["password"])) {
 
-                // 4. Start session and regenerate session ID to prevent fixation attacks
                 session_start();
                 session_regenerate_id(true);
 
-                // 5. Store session variables
                 $_SESSION["user_id"]       = $user["id"];
                 $_SESSION["user_name"]     = $user["name"];
                 $_SESSION["user_email"]    = $user["email"];
                 $_SESSION["user_role"]     = $user["role"];
                 $_SESSION["last_activity"] = time();
 
-                // 6. Handle optional Remember-Me token
                 if ($remember_me) {
                     $token      = bin2hex(random_bytes(32));
                     $token_hash = hash("sha256", $token);
@@ -50,15 +45,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $token_stmt->execute();
                         $token_stmt->close();
 
-                        // Set cookie for 30 days (HTTPOnly flag enabled)
                         setcookie("remember_token", $token, time() + (30 * 86400), "/", "", false, true);
                     }
                 }
 
+                log_audit($conn, "Login", "Signed in with role: " . $user["role"]);
+
                 $stmt->close();
                 $conn->close();
 
-                // 7. Role-based dashboard redirection
                 if ($user["role"] === "admin") {
                     header("Location: ../pages/admin.php");
                 } else {

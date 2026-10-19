@@ -1,26 +1,74 @@
 <?php
 require_once "../php/auth_check.php";
-
-// Strict role guard: only allow admin role
 require_role("admin");
 
 require_once "../php/db_connect_mysqli.php";
+require_once "../php/role_menu.php";
 
 $admin_name  = htmlspecialchars($_SESSION["user_name"] ?? "Administrator");
 $admin_email = htmlspecialchars($_SESSION["user_email"] ?? "");
 $last_active = date("h:i:s A", $_SESSION["last_activity"] ?? time());
 
-// Fetch users from database for admin overview
-$users_list = [];
 $total_users = 0;
-$result = $conn->query("SELECT id, name, email, role, created_at FROM users ORDER BY id DESC");
-if ($result) {
-    while ($row = $result->fetch_assoc()) {
+$res = $conn->query("SELECT COUNT(*) AS total FROM users");
+if ($res) {
+    $row = $res->fetch_assoc();
+    $total_users = (int)$row["total"];
+}
+
+$total_students = 0;
+$res = $conn->query("SELECT COUNT(*) AS total FROM students");
+if ($res) {
+    $row = $res->fetch_assoc();
+    $total_students = (int)$row["total"];
+}
+
+$total_events = 0;
+$res = $conn->query("SELECT COUNT(*) AS total FROM events");
+if ($res) {
+    $row = $res->fetch_assoc();
+    $total_events = (int)$row["total"];
+}
+
+$total_registrations = 0;
+$res = $conn->query("SELECT COUNT(*) AS total FROM event_registrations");
+if ($res) {
+    $row = $res->fetch_assoc();
+    $total_registrations = (int)$row["total"];
+}
+
+$latest_registrations = [];
+$reg_sql = "SELECT r.reg_id, s.name AS student_name, s.email AS student_email, e.title AS event_title, e.category, r.registration_date 
+            FROM event_registrations r 
+            JOIN students s ON r.student_id = s.id 
+            JOIN events e ON r.event_id = e.event_id 
+            ORDER BY r.registration_date DESC 
+            LIMIT 5";
+$reg_res = $conn->query($reg_sql);
+if ($reg_res) {
+    while ($row = $reg_res->fetch_assoc()) {
+        $latest_registrations[] = $row;
+    }
+}
+
+$audit_logs = [];
+$audit_res = $conn->query("SELECT log_id, user_name, action, details, ip_address, created_at FROM audit_logs ORDER BY log_id DESC LIMIT 5");
+if ($audit_res) {
+    while ($row = $audit_res->fetch_assoc()) {
+        $audit_logs[] = $row;
+    }
+}
+
+$users_list = [];
+$res = $conn->query("SELECT id, name, email, role, created_at FROM users ORDER BY id DESC LIMIT 5");
+if ($res) {
+    while ($row = $res->fetch_assoc()) {
         $users_list[] = $row;
     }
-    $total_users = count($users_list);
 }
 $conn->close();
+
+$menu_items = get_role_menu();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,6 +131,11 @@ $conn->close();
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
             border-left: 5px solid #2563eb;
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
         }
 
         .stat-card h3 {
@@ -97,17 +150,62 @@ $conn->close();
             margin: 0;
         }
 
+        .quick-actions {
+            background: white;
+            padding: 20px 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .quick-actions strong {
+            color: #1e293b;
+            font-size: 14px;
+        }
+
+        .action-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f1f5f9;
+            color: #1e293b;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .action-chip:hover {
+            background: #2563eb;
+            color: white;
+        }
+
         .table-card {
             background: white;
             padding: 25px;
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
             overflow-x: auto;
+            margin-bottom: 25px;
+        }
+
+        .table-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
         }
 
         .table-card h3 {
             color: #1d2b42;
-            margin-bottom: 15px;
+            margin: 0;
+            font-size: 18px;
         }
 
         table {
@@ -145,6 +243,25 @@ $conn->close();
             font-size: 12px;
             font-weight: 600;
         }
+
+        .badge-action {
+            display: inline-block;
+            background: #ede9fe;
+            color: #6d28d9;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-category {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
     </style>
     <script>
         if (localStorage.getItem("theme") === "dark") {
@@ -157,23 +274,26 @@ $conn->close();
     <header>
         <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
         <h1>⚙️ Administrator Control Panel</h1>
-        <p>Manage campus portal users, events, and records.</p>
+        <p>Role-based management, aggregated metrics, and system audit logs.</p>
     </header>
 
     <nav>
         <button class="hamburger" aria-label="Toggle menu">☰</button>
         <div id="nav-links">
-            <a href="index.html">Home</a>
-            <a href="admin.php">Admin Panel</a>
-            <a href="students.php">Students</a>
-            <a href="events_manage.php">Events</a>
-            <a href="../php/logout.php" style="color: #f87171; font-weight: bold;">Logout</a>
+            <?php foreach ($menu_items as $item): ?>
+                <?php if (!empty($item["special"]) && $item["special"] === "logout"): ?>
+                    <a href="<?php echo $item['link']; ?>" style="color: #f87171; font-weight: bold;">🚪 <?php echo htmlspecialchars($item['title']); ?></a>
+                <?php else: ?>
+                    <a href="<?php echo $item['link']; ?>" class="<?php echo ($item['link'] === 'admin.php') ? 'active-link' : ''; ?>">
+                        <?php echo htmlspecialchars($item['title']); ?>
+                    </a>
+                <?php endif; ?>
+            <?php endforeach; ?>
             <button id="theme-toggle" style="margin-left: 10px; padding: 8px 14px; font-weight: 600;">🌙 Dark Mode</button>
         </div>
     </nav>
 
     <main>
-        <!-- Admin Greeting Header -->
         <div class="admin-header-card">
             <div>
                 <h2 style="color: #1d2b42; margin-bottom: 5px;">
@@ -186,25 +306,113 @@ $conn->close();
             </div>
         </div>
 
-        <!-- System Summary Cards -->
         <div class="stats-grid">
             <div class="stat-card">
-                <p>Total Registered Accounts</p>
+                <p>Total User Accounts</p>
                 <h3><?php echo $total_users; ?></h3>
             </div>
             <div class="stat-card" style="border-left-color: #16a34a;">
-                <p>System Status</p>
-                <h3 style="font-size: 20px; color: #16a34a; margin-top: 10px;">Active</h3>
+                <p>Registered Students</p>
+                <h3><?php echo $total_students; ?></h3>
             </div>
             <div class="stat-card" style="border-left-color: #f59e0b;">
-                <p>Inactivity Limit</p>
-                <h3 style="font-size: 20px; color: #f59e0b; margin-top: 10px;">15 Minutes</h3>
+                <p>Campus Events</p>
+                <h3><?php echo $total_events; ?></h3>
+            </div>
+            <div class="stat-card" style="border-left-color: #8b5cf6;">
+                <p>Event Registrations</p>
+                <h3><?php echo $total_registrations; ?></h3>
             </div>
         </div>
 
-        <!-- Registered Users Table (Role Management) -->
+        <div class="quick-actions">
+            <strong>⚡ Quick Management:</strong>
+            <a href="students.php" class="action-chip">👥 Students Directory</a>
+            <a href="student_add.php" class="action-chip">➕ Add Student</a>
+            <a href="students_ajax.php" class="action-chip">⚡ Student API (AJAX)</a>
+            <a href="events_manage.php" class="action-chip">📅 Events Directory</a>
+            <a href="event_add.php" class="action-chip">➕ Add Event</a>
+        </div>
+
         <div class="table-card">
-            <h3>👥 Registered System Accounts</h3>
+            <div class="table-card-header">
+                <h3>🎟️ Latest Event Registrations</h3>
+                <a href="events_manage.php" class="action-chip" style="font-size: 12px;">View Events</a>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Reg ID</th>
+                        <th>Student Name</th>
+                        <th>Email</th>
+                        <th>Event Title</th>
+                        <th>Category</th>
+                        <th>Registration Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (count($latest_registrations) > 0): ?>
+                        <?php foreach ($latest_registrations as $r): ?>
+                            <tr>
+                                <td>#<?php echo htmlspecialchars($r["reg_id"]); ?></td>
+                                <td><strong><?php echo htmlspecialchars($r["student_name"]); ?></strong></td>
+                                <td><?php echo htmlspecialchars($r["student_email"]); ?></td>
+                                <td><?php echo htmlspecialchars($r["event_title"]); ?></td>
+                                <td><span class="badge-category"><?php echo htmlspecialchars($r["category"]); ?></span></td>
+                                <td><?php echo htmlspecialchars($r["registration_date"]); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="6" style="text-align: center; color: #64748b; padding: 20px;">No event registrations found.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-card">
+            <div class="table-card-header">
+                <h3>📜 System Audit Logs</h3>
+                <span style="font-size: 13px; color: #64748b;">Tracks admin and system actions</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Log ID</th>
+                        <th>User</th>
+                        <th>Action Performed</th>
+                        <th>Action Details</th>
+                        <th>IP Address</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (count($audit_logs) > 0): ?>
+                        <?php foreach ($audit_logs as $log): ?>
+                            <tr>
+                                <td>#<?php echo htmlspecialchars($log["log_id"]); ?></td>
+                                <td><strong><?php echo htmlspecialchars($log["user_name"]); ?></strong></td>
+                                <td><span class="badge-action"><?php echo htmlspecialchars($log["action"]); ?></span></td>
+                                <td><?php echo htmlspecialchars($log["details"]); ?></td>
+                                <td><code><?php echo htmlspecialchars($log["ip_address"]); ?></code></td>
+                                <td><?php echo htmlspecialchars($log["created_at"]); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="6" style="text-align: center; color: #64748b; padding: 20px;">No audit log records available.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-card">
+            <div class="table-card-header">
+                <h3>👥 Registered System Accounts</h3>
+                <span style="font-size: 13px; color: #64748b;">User accounts and role assignments</span>
+            </div>
             <table>
                 <thead>
                     <tr>

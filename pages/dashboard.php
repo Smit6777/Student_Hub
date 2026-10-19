@@ -1,5 +1,6 @@
 <?php
 require_once "../php/auth_check.php";
+require_once "../php/role_menu.php";
 
 $user_name     = htmlspecialchars($_SESSION["user_name"] ?? "Student");
 $user_email    = htmlspecialchars($_SESSION["user_email"] ?? "");
@@ -7,6 +8,7 @@ $user_role     = htmlspecialchars(ucfirst($_SESSION["user_role"] ?? "student"));
 $session_id    = htmlspecialchars(session_id());
 $last_active   = date("h:i:s A", $_SESSION["last_activity"] ?? time());
 $forbidden_msg = (isset($_GET["error"]) && $_GET["error"] === "forbidden") ? "Access Denied: You do not have permission to view the Admin panel." : "";
+$menu_items    = get_role_menu();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -146,13 +148,15 @@ $forbidden_msg = (isset($_GET["error"]) && $_GET["error"] === "forbidden") ? "Ac
     <nav>
         <button class="hamburger" aria-label="Toggle menu">☰</button>
         <div id="nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="dashboard.php">Dashboard</a>
-            <a href="students.php">Students</a>
-            <a href="events.html">Events</a>
-            <a href="contact.html">Contact</a>
-            <a href="../php/logout.php" style="color: #f87171; font-weight: bold;">Logout</a>
+            <?php foreach ($menu_items as $item): ?>
+                <?php if (!empty($item["special"]) && $item["special"] === "logout"): ?>
+                    <a href="<?php echo $item['link']; ?>" style="color: #f87171; font-weight: bold;">🚪 <?php echo htmlspecialchars($item['title']); ?></a>
+                <?php else: ?>
+                    <a href="<?php echo $item['link']; ?>" class="<?php echo ($item['link'] === 'dashboard.php') ? 'active-link' : ''; ?>">
+                        <?php echo htmlspecialchars($item['title']); ?>
+                    </a>
+                <?php endif; ?>
+            <?php endforeach; ?>
             <button id="theme-toggle" style="margin-left: 10px; padding: 8px 14px; font-weight: 600;">🌙 Dark Mode</button>
         </div>
     </nav>

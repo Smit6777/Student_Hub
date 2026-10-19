@@ -3,7 +3,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// 1. Check Remember-Me cookie if session is not active
 if (!isset($_SESSION["user_id"]) && isset($_COOKIE["remember_token"])) {
     require_once "db_connect_mysqli.php";
 
@@ -27,19 +26,15 @@ if (!isset($_SESSION["user_id"]) && isset($_COOKIE["remember_token"])) {
     }
 }
 
-// 2. Block unauthorized access
 if (!isset($_SESSION["user_id"])) {
     header("Location: ../pages/login.php?error=unauthorized");
     exit();
 }
 
-// 3. Enforce session timeout (15 minutes of inactivity)
 $timeout_seconds = 900;
 if (isset($_SESSION["last_activity"]) && (time() - $_SESSION["last_activity"] > $timeout_seconds)) {
-    // Clear session data
     $_SESSION = array();
 
-    // Expire session cookie
     if (ini_get("session.use_cookies")) {
         $params = session_get_cookie_params();
         setcookie(session_name(), "", time() - 42000,
@@ -53,10 +48,8 @@ if (isset($_SESSION["last_activity"]) && (time() - $_SESSION["last_activity"] > 
     exit();
 }
 
-// Update last activity timestamp on current request
 $_SESSION["last_activity"] = time();
 
-// 4. Role-based access control helper function
 function require_role($required_role) {
     if (!isset($_SESSION["user_role"]) || $_SESSION["user_role"] !== $required_role) {
         header("Location: ../pages/dashboard.php?error=forbidden");

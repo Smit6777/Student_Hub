@@ -1,12 +1,10 @@
 <?php
 require_once "../php/db_connect_mysqli.php";
 
-// 1. Capture search and filter parameters
 $search        = trim($_GET["search"] ?? "");
 $course_filter = trim($_GET["course_id"] ?? "");
 $year_filter   = trim($_GET["year"] ?? "");
 
-// 2. Fetch courses list for filter dropdown
 $courses_list = [];
 $c_res = $conn->query("SELECT course_id, course_name FROM courses ORDER BY course_name ASC");
 if ($c_res) {
@@ -15,7 +13,6 @@ if ($c_res) {
     }
 }
 
-// 3. Construct dynamic SQL query with MySQLi Prepared Statements
 $sql    = "SELECT s.id, s.name, s.email, s.mobile, s.course_id, c.course_name, s.year, s.gender 
            FROM students s 
            LEFT JOIN courses c ON s.course_id = c.course_id 
@@ -23,7 +20,6 @@ $sql    = "SELECT s.id, s.name, s.email, s.mobile, s.course_id, c.course_name, s
 $params = [];
 $types  = "";
 
-// Search by Name, Email, or Course
 if ($search !== "") {
     $sql     .= " AND (s.name LIKE ? OR s.email LIKE ? OR c.course_name LIKE ?)";
     $term     = "%" . $search . "%";
@@ -33,14 +29,12 @@ if ($search !== "") {
     $types   .= "sss";
 }
 
-// Filter by Course
 if ($course_filter !== "" && is_numeric($course_filter)) {
     $sql     .= " AND s.course_id = ?";
     $params[] = (int)$course_filter;
     $types   .= "i";
 }
 
-// Filter by Year
 if ($year_filter !== "" && is_numeric($year_filter)) {
     $sql     .= " AND s.year = ?";
     $params[] = (int)$year_filter;
@@ -49,7 +43,6 @@ if ($year_filter !== "" && is_numeric($year_filter)) {
 
 $sql .= " ORDER BY s.id DESC";
 
-// Execute query using Prepared Statement
 $stmt = $conn->prepare($sql);
 if (!empty($params)) {
     $stmt->bind_param($types, ...$params);
@@ -66,7 +59,6 @@ $total_count = count($students);
 $stmt->close();
 $conn->close();
 
-// 4. Handle UI feedback messages
 $msg   = $_GET["msg"] ?? "";
 $error = $_GET["error"] ?? "";
 ?>

@@ -7,7 +7,6 @@ if (!$id || $id <= 0) {
     exit();
 }
 
-// 1. Fetch current student record using Prepared Statement
 $stmt = $conn->prepare("SELECT id, name, email, mobile, course_id, year, gender FROM students WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
@@ -20,7 +19,6 @@ if (!$student) {
     exit();
 }
 
-// 2. Fetch courses list for dropdown
 $courses = [];
 $c_res = $conn->query("SELECT course_id, course_name FROM courses ORDER BY course_name ASC");
 if ($c_res) {

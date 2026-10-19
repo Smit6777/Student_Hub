@@ -1,9 +1,9 @@
 <?php
 require_once "db_connect_mysqli.php";
+require_once "audit_logger.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    // 1. Sanitize text inputs
     $event_id       = filter_var($_POST["event_id"] ?? null, FILTER_VALIDATE_INT);
     $current_poster = trim($_POST["current_poster"] ?? "");
     $title          = trim($_POST["title"] ?? "");
@@ -19,20 +19,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $poster_filename = $current_poster;
 
-    // 2. Process optional replacement poster file
     if (isset($_FILES["poster"]) && $_FILES["poster"]["error"] === UPLOAD_ERR_OK) {
         $file_tmp   = $_FILES["poster"]["tmp_name"];
         $file_name  = $_FILES["poster"]["name"];
         $file_size  = $_FILES["poster"]["size"];
-        $max_size   = 2 * 1024 * 1024; // 2MB limit
+        $max_size   = 2 * 1024 * 1024;
 
-        // File Size Validation
         if ($file_size > $max_size) {
             header("Location: ../pages/event_edit.php?id=" . urlencode($event_id) . "&error=file_size");
             exit();
         }
 
-        // File Type Validation
         $allowed_exts  = ["jpg", "jpeg", "png", "webp"];
         $allowed_mimes = ["image/jpeg", "image/png", "image/webp"];
 
@@ -53,7 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $target_path  = $upload_dir . $new_filename;
 
         if (move_uploaded_file($file_tmp, $target_path)) {
-            // Delete old poster file if one exists
             if (!empty($current_poster) && file_exists($upload_dir . $current_poster)) {
                 unlink($upload_dir . $current_poster);
             }
@@ -64,7 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    // 3. Update event record using MySQLi Prepared Statement
     $sql  = "UPDATE events SET title = ?, event_date = ?, location = ?, category = ?, poster = ?, description = ? WHERE event_id = ?";
     $stmt = $conn->prepare($sql);
 
@@ -72,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->bind_param("ssssssi", $title, $event_date, $location, $category, $poster_filename, $description, $event_id);
 
         if ($stmt->execute()) {
+            log_audit($conn, "Update Event", "Updated event: " . $title . " (ID: " . $event_id . ")");
             $stmt->close();
             $conn->close();
             header("Location: ../pages/events_manage.php?msg=updated");

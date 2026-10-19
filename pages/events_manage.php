@@ -1,7 +1,6 @@
 <?php
 require_once "../php/db_connect_mysqli.php";
 
-// Fetch all events from database
 $events = [];
 $sql    = "SELECT event_id, title, event_date, location, category, poster, description FROM events ORDER BY event_date ASC";
 $result = $conn->query($sql);

@@ -1,5 +1,6 @@
 <?php
 require_once "db_connect_mysqli.php";
+require_once "audit_logger.php";
 
 $id = filter_var($_GET["id"] ?? null, FILTER_VALIDATE_INT);
 
@@ -8,7 +9,6 @@ if (!$id || $id <= 0) {
     exit();
 }
 
-// 1. Fetch poster file name so we can delete the file from server
 $p_stmt = $conn->prepare("SELECT poster FROM events WHERE event_id = ?");
 if ($p_stmt) {
     $p_stmt->bind_param("i", $id);
@@ -23,13 +23,13 @@ if ($p_stmt) {
     $p_stmt->close();
 }
 
-// 2. Delete event record from MySQL using Prepared Statement
 $stmt = $conn->prepare("DELETE FROM events WHERE event_id = ?");
 
 if ($stmt) {
     $stmt->bind_param("i", $id);
 
     if ($stmt->execute()) {
+        log_audit($conn, "Delete Event", "Deleted event ID: " . $id);
         $stmt->close();
         $conn->close();
         header("Location: ../pages/events_manage.php?msg=deleted");

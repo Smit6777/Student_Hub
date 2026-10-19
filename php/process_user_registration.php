@@ -6,12 +6,10 @@ $message     = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    // 1. Sanitize user inputs
     $name     = isset($_POST["name"]) ? trim($_POST["name"]) : "";
     $email    = isset($_POST["email"]) ? trim($_POST["email"]) : "";
     $password = isset($_POST["password"]) ? $_POST["password"] : "";
 
-    // 2. Server-side validation
     if (empty($name) || empty($email) || empty($password)) {
         $status_type = "error";
         $message     = "All fields (Name, Email, Password) are required.";
@@ -22,7 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $status_type = "error";
         $message     = "Weak password! Password must contain at least 6 characters.";
     } else {
-        // 3. Check for duplicate email using Prepared Statement
         $check_sql  = "SELECT id FROM users WHERE email = ?";
         $check_stmt = $conn->prepare($check_sql);
 
@@ -35,10 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $status_type = "error";
                 $message     = "Duplicate Email! This email is already registered.";
             } else {
-                // 4. Securely hash password before storing
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-                // 5. Insert new user using Prepared Statement
                 $insert_sql  = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
                 $insert_stmt = $conn->prepare($insert_sql);
 
