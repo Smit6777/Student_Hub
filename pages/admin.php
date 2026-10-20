@@ -274,7 +274,7 @@ $menu_items = get_role_menu();
     <header>
         <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
         <h1>⚙️ Administrator Control Panel</h1>
-        <p>Role-based management, aggregated metrics, and system audit logs.</p>
+        <p>Manage campus portal users, events, and records.</p>
     </header>
 
     <nav>
@@ -297,7 +297,7 @@ $menu_items = get_role_menu();
         <div class="admin-header-card">
             <div>
                 <h2 style="color: #1d2b42; margin-bottom: 5px;">
-                    Welcome, <?php echo $admin_name; ?>! <span class="role-badge-admin">Admin Privileges</span>
+                    Welcome, <?php echo $admin_name; ?>! <span class="role-badge-admin">Administrator</span>
                 </h2>
                 <p style="color: #64748b; margin: 0;">Session Email: <strong><?php echo $admin_email; ?></strong> | Last Active: <?php echo $last_active; ?></p>
             </div>
@@ -326,10 +326,10 @@ $menu_items = get_role_menu();
         </div>
 
         <div class="quick-actions">
-            <strong>⚡ Quick Management:</strong>
+            <strong>⚡ Quick Actions:</strong>
             <a href="students.php" class="action-chip">👥 Students Directory</a>
             <a href="student_add.php" class="action-chip">➕ Add Student</a>
-            <a href="students_ajax.php" class="action-chip">⚡ Student API (AJAX)</a>
+            <a href="students_ajax.php" class="action-chip">⚡ Live Directory</a>
             <a href="events_manage.php" class="action-chip">📅 Events Directory</a>
             <a href="event_add.php" class="action-chip">➕ Add Event</a>
         </div>
@@ -373,18 +373,18 @@ $menu_items = get_role_menu();
 
         <div class="table-card">
             <div class="table-card-header">
-                <h3>📜 System Audit Logs</h3>
-                <span style="font-size: 13px; color: #64748b;">Tracks admin and system actions</span>
+                <h3>📜 Activity Log</h3>
+                <span style="font-size: 13px; color: #64748b;">Recent portal activity</span>
             </div>
             <table>
                 <thead>
                     <tr>
-                        <th>Log ID</th>
+                        <th>ID</th>
                         <th>User</th>
-                        <th>Action Performed</th>
-                        <th>Action Details</th>
+                        <th>Action</th>
+                        <th>Details</th>
                         <th>IP Address</th>
-                        <th>Timestamp</th>
+                        <th>Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -401,7 +401,7 @@ $menu_items = get_role_menu();
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="6" style="text-align: center; color: #64748b; padding: 20px;">No audit log records available.</td>
+                            <td colspan="6" style="text-align: center; color: #64748b; padding: 20px;">No recent activity found.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -410,8 +410,8 @@ $menu_items = get_role_menu();
 
         <div class="table-card">
             <div class="table-card-header">
-                <h3>👥 Registered System Accounts</h3>
-                <span style="font-size: 13px; color: #64748b;">User accounts and role assignments</span>
+                <h3>👥 Registered Accounts</h3>
+                <span style="font-size: 13px; color: #64748b;">User accounts</span>
             </div>
             <table>
                 <thead>
@@ -451,7 +451,29 @@ $menu_items = get_role_menu();
     </main>
 
     <footer>
-        <p>&copy; 2026 StudentHub | Designed by Smit Makwana</p>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h2>🎓 StudentHub</h2>
+                <p>Your Digital Campus Portal for academics, events, and student life.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="admin.php">Admin Panel</a>
+                <a href="dashboard.php">Dashboard</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="cookie-policy.html">Cookie Policy</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📧 smitmakwana6777@gmail.com</p>
+                <p>📞 +91 9998403012</p>
+                <p>📍 CHARUSAT University Campus, Changa, Gujarat - 388421</p>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">&copy; 2026 StudentHub | Designed by Smit Makwana</p>
     </footer>
 
     <script src="../javascripts/scripts.js"></script>

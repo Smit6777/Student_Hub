@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . "/security_headers.php";
 // Load environment variables from .env if present (never pushed to GitHub)
 if (file_exists(__DIR__ . "/../.env")) {
     $env_lines = file(__DIR__ . "/../.env", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);

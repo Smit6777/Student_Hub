@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | StudentHub</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .legal-wrapper {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+            line-height: 1.7;
+            color: #334155;
+        }
+        .legal-wrapper h1 {
+            color: #1e3a8a;
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        .legal-wrapper .last-updated {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 12px;
+        }
+        .legal-wrapper h2 {
+            color: #1e293b;
+            font-size: 1.3rem;
+            margin-top: 28px;
+            margin-bottom: 10px;
+            border-left: 4px solid #2563eb;
+            padding-left: 10px;
+        }
+        .legal-wrapper p, .legal-wrapper ul {
+            margin-bottom: 16px;
+        }
+        .legal-wrapper ul {
+            padding-left: 25px;
+        }
+        .legal-wrapper li {
+            margin-bottom: 8px;
+        }
+        .legal-wrapper a {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+        html.dark-theme .legal-wrapper {
+            background: #1e293b;
+            color: #cbd5e1;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        html.dark-theme .legal-wrapper h1 {
+            color: #60a5fa;
+        }
+        html.dark-theme .legal-wrapper h2 {
+            color: #f1f5f9;
+        }
+        html.dark-theme .legal-wrapper .last-updated {
+            color: #94a3b8;
+            border-bottom-color: #334155;
+        }
+    </style>
+    <script>
+        if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.classList.add('dark-theme');
+        }
+    </script>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
+        <h1>StudentHub</h1>
+        <p>Your Digital Campus Portal</p>
+    </header>
+
+    <nav aria-label="StudentHub Main Navigation">
+        <button class="hamburger" aria-label="Toggle navigation menu">☰</button>
+        <div id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="register_user.html">Register</a>
+            <a href="login.php">Login</a>
+            <a href="dashboard.php">Dashboard</a>
+            <a href="events.html">Events</a>
+            <a href="contact.html">Contact</a>
+            <button id="theme-toggle" style="margin-left: 10px; padding: 8px 14px; font-weight: 600;">🌙 Dark Mode</button>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <div class="legal-wrapper">
+            <h1>Privacy Policy</h1>
+            <p class="last-updated">Last Updated: October 20, 2026</p>
+
+            <p>Welcome to <strong>StudentHub</strong>. We respect the privacy of every student, faculty member, and visitor. This Privacy Policy explains what personal information we collect, why we collect it, how it is secured, and what rights you have regarding your data.</p>
+
+            <h2>1. Information We Collect</h2>
+            <p>We practice strict <strong>data minimization</strong> and collect only the information necessary to provide academic and campus event services:</p>
+            <ul>
+                <li><strong>Account Information:</strong> Full Name, Email Address, and a cryptographically salted password hash when creating a user account.</li>
+                <li><strong>Student Academic Information:</strong> Course enrolled, year of study, mobile number, and gender (provided voluntarily during student directory registration).</li>
+                <li><strong>Event Data:</strong> Event participation records, workshop sign-ups, and optional event poster uploads.</li>
+                <li><strong>Technical & Session Data:</strong> Authentication session cookies (<code>PHPSESSID</code>), voluntary remember-me authentication tokens, and audit logs of administrative actions.</li>
+            </ul>
+
+            <h2>2. Purpose of Data Collection</h2>
+            <p>Your information is used strictly for internal campus purposes:</p>
+            <ul>
+                <li>Authenticating student and administrator access.</li>
+                <li>Displaying student directories and academic profiles.</li>
+                <li>Coordinating workshop, seminar, and hackathon registrations.</li>
+                <li>Maintaining institutional system audit logs for security and compliance.</li>
+            </ul>
+            <p>We do <strong>not</strong> sell, rent, monetize, or share your personal data with third-party advertisers or external marketing organizations.</p>
+
+            <h2>3. Data Protection and Security</h2>
+            <p>We implement industry-standard safeguards to protect your personal information:</p>
+            <ul>
+                <li>Passwords are encrypted using modern <strong>Bcrypt (PASSWORD_DEFAULT)</strong> one-way hashing algorithms. We never store plain-text passwords.</li>
+                <li>Database queries utilize parameterized prepared statements to defend against SQL Injection vulnerabilities.</li>
+                <li>Cross-Site Request Forgery (CSRF) tokens protect sensitive forms and administrative mutations.</li>
+                <li>Sensitive session cookies are protected with <code>HttpOnly</code> and <code>SameSite</code> flags.</li>
+                <li>Standard defensive HTTP security headers are transmitted to guard against clickjacking and MIME-sniffing.</li>
+            </ul>
+
+            <h2>4. Cookie Usage</h2>
+            <p>StudentHub uses only strictly essential session cookies and client-side preference storage:</p>
+            <ul>
+                <li><code>PHPSESSID</code>: Keeps you logged in as you navigate between pages.</li>
+                <li><code>remember_token</code>: Optional cookie set only when you check "Remember Me for 30 days".</li>
+                <li><code>localStorage</code>: Used strictly to preserve your Light/Dark theme preference and notice dismissal state.</li>
+            </ul>
+            <p>For more details, please review our complete <a href="cookie-policy.html">Cookie Policy</a>.</p>
+
+            <h2>5. Age Requirement</h2>
+            <p>StudentHub is designed exclusively for college and university students. By registering on StudentHub, you verify that you are at least 16 years of age and enrolled in university-level coursework.</p>
+
+            <h2>6. Your Rights and Account Deletion</h2>
+            <p>Under international privacy principles and data protection standards, you have the following rights:</p>
+            <ul>
+                <li><strong>Right to Access:</strong> View all personal data held in your student profile and dashboard.</li>
+                <li><strong>Right to Rectification:</strong> Edit or update outdated personal details at any time.</li>
+                <li><strong>Right to Erasure (Account Deletion):</strong> You have the right to permanently delete your account and remove your credentials from our database. Logged-in users can execute account deletion anytime via the <a href="delete_account.php">Delete Account</a> page.</li>
+            </ul>
+
+            <h2>7. Contact Information</h2>
+            <p>If you have any questions or data privacy inquiries, please contact our administrative team:</p>
+            <ul>
+                <li><strong>Institution:</strong> StudentHub, CHARUSAT University Campus</li>
+                <li><strong>Email:</strong> smitmakwana6777@gmail.com</li>
+                <li><strong>Phone:</strong> +91 9998403012</li>
+                <li><strong>Address:</strong> CHARUSAT Campus, Changa, Anand, Gujarat - 388421</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h2>🎓 StudentHub</h2>
+                <p>Your Digital Campus Portal for academics, events, workshops, and student life.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="cookie-policy.html">Cookie Policy</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📧 smitmakwana6777@gmail.com</p>
+                <p>📞 +91 9998403012</p>
+                <p>📍 CHARUSAT University Campus, Changa, Gujarat - 388421</p>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">&copy; 2026 StudentHub | Designed by Smit Makwana</p>
+    </footer>
+
+    <script src="../javascripts/scripts.js"></script>
+</body>
+</html>

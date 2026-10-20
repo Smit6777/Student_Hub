@@ -29,33 +29,35 @@
 
 <body>
 
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Header -->
     <header>
-        <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
+        <img src="../image/image-removebg-preview.png" alt="StudentHub Official Portal Logo" width="100">
         <h1>Student Feedback</h1>
         <p>Help Us Improve StudentHub With Your Valuable Feedback!</p>
     </header>
 
     <!-- Navigation -->
-    <nav>
-        <button class="hamburger" aria-label="Toggle menu">☰</button>
+    <nav aria-label="StudentHub Main Navigation">
+        <button class="hamburger" aria-label="Toggle navigation menu">☰</button>
         <div id="nav-links">
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
-            <a href="register.html">Register</a>
-            <a href="login.html">Login</a>
-            <a href="dashboard.html">Dashboard</a>
+            <a href="register_user.html">Register</a>
+            <a href="login.php">Login</a>
+            <a href="dashboard.php">Dashboard</a>
             <a href="events.html">Events</a>
             <a href="profile.html">Profile</a>
             <a href="contact.html">Contact</a>
-            <a href="admin.html">Admin</a>
+            <a href="admin.php">Admin</a>
             <a href="faq.html">FAQ</a>
             <a href="feedback.html">Feedback</a>
             <button id="theme-toggle" style="margin-left: 10px; padding: 8px 14px; font-weight: 600;">🌙 Dark Mode</button>
         </div>
     </nav>
 
-    <main>
+    <main id="main-content">
 
         <!-- Why Feedback -->
         <section>
@@ -108,13 +110,21 @@
                 <label for="fbMessage">Your Feedback</label><br>
                 <textarea id="fbMessage" name="fbMessage" placeholder="Share your detailed feedback, suggestions, or report an issue..." required></textarea><br>
 
+                <div style="margin-bottom: 15px; display: flex; align-items: flex-start; gap: 8px;">
+                    <input type="checkbox" id="fb_consent" name="fb_consent" required style="width: auto; margin-top: 4px; cursor: pointer;">
+                    <label for="fb_consent" style="font-size: 13px; color: #475569; line-height: 1.4; cursor: pointer;">
+                        I consent to StudentHub storing my feedback and processing suggestions in accordance with the <a href="privacy.html" target="_blank" style="color: #2563eb; text-decoration: underline;">Privacy Policy</a>.
+                    </label>
+                </div>
+
                 <button type="submit">🚀 Submit Feedback</button>
             </form>
         </section>
 
         <!-- Recent Feedbacks -->
         <section>
-            <h2>📋 Recent Feedback</h2>
+            <h2>📋 Recent Feedback (Sample Submissions)</h2>
+            <p style="font-size: 13px; color: #64748b; margin-bottom: 15px;"><em>Illustrative student feedback examples from platform testing:</em></p>
 
             <article>
                 <h3>Priya Patel — ⭐⭐⭐⭐⭐</h3>
@@ -141,6 +151,7 @@
             <p><strong>Feature Requests :</strong> 18</p>
             <p><strong>Bug Reports :</strong> 7</p>
             <p><strong>General Feedback :</strong> 31</p>
+            <p style="font-size: 12px; color: #64748b; margin-top: 8px;"><em>*Testing metrics recorded during campus trials.</em></p>
         </aside>
 
     </main>
@@ -158,12 +169,15 @@
                 <a href="about.html">About</a>
                 <a href="events.html">Events</a>
                 <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="cookie-policy.html">Cookie Policy</a>
             </div>
             <div class="footer-section">
                 <h3>Contact</h3>
                 <p>📧 smitmakwana6777@gmail.com</p>
                 <p>📞 +91 9998403012</p>
-                <p>📍 CHARUSAT University</p>
+                <p>📍 CHARUSAT University Campus, Changa, Gujarat - 388421</p>
             </div>
         </div>
         <hr>

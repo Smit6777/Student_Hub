@@ -190,7 +190,7 @@ $menu_items    = get_role_menu();
                     <strong><?php echo $user_role; ?></strong>
                 </div>
                 <div class="session-item">
-                    <small>Session Inactivity Limit</small>
+                    <small>Session Timeout</small>
                     <strong>15 Minutes</strong>
                 </div>
                 <div class="session-item">
@@ -222,6 +222,19 @@ $menu_items    = get_role_menu();
                 </ul>
             </div>
         </div>
+
+        <!-- Privacy & Account Options -->
+        <div class="content-card" style="margin-bottom: 25px;">
+            <h3>🛡️ Privacy & Account Settings</h3>
+            <p style="color: #64748b; margin-bottom: 15px;">Manage your student data rights and account security settings in compliance with privacy guidelines:</p>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
+                <a href="privacy.html" style="color: #2563eb; text-decoration: none; font-weight: 600;">📄 View Privacy Policy</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="cookie-policy.html" style="color: #2563eb; text-decoration: none; font-weight: 600;">🍪 Cookie Settings</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="delete_account.php" style="color: #dc2626; text-decoration: none; font-weight: 600;">🗑️ Permanent Account Deletion</a>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -236,12 +249,15 @@ $menu_items    = get_role_menu();
                 <a href="dashboard.php">Dashboard</a>
                 <a href="events.html">Events</a>
                 <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="cookie-policy.html">Cookie Policy</a>
             </div>
             <div class="footer-section">
                 <h3>Contact</h3>
                 <p>📧 smitmakwana6777@gmail.com</p>
                 <p>📞 +91 9998403012</p>
-                <p>📍 CHARUSAT University</p>
+                <p>📍 CHARUSAT University Campus, Changa, Gujarat - 388421</p>
             </div>
         </div>
         <hr>

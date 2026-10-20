@@ -1,8 +1,25 @@
 <?php
 require_once "db_connect_mysqli.php";
 require_once "audit_logger.php";
+require_once "csrf.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    // Rate Limiting / Brute Force Prevention
+    $lockout_seconds = 300; // 5 minutes
+    $max_attempts    = 5;
+
+    if (isset($_SESSION["login_lockout"]) && time() < $_SESSION["login_lockout"]) {
+        $remaining = ceil(($_SESSION["login_lockout"] - time()) / 60);
+        header("Location: ../pages/login.php?error=throttled&wait=" . $remaining);
+        exit();
+    }
+
+    // CSRF Protection
+    if (!verify_csrf_token()) {
+        header("Location: ../pages/login.php?error=csrf");
+        exit();
+    }
 
     $email       = trim($_POST["email"] ?? "");
     $password    = $_POST["password"] ?? "";
@@ -49,6 +66,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     }
                 }
 
+                unset($_SESSION["login_attempts"]);
+                unset($_SESSION["login_lockout"]);
+
                 log_audit($conn, "Login", "Signed in with role: " . $user["role"]);
 
                 $stmt->close();
@@ -63,12 +83,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             } else {
                 // Invalid password
+                $_SESSION["login_attempts"] = ($_SESSION["login_attempts"] ?? 0) + 1;
+                if ($_SESSION["login_attempts"] >= $max_attempts) {
+                    $_SESSION["login_lockout"] = time() + $lockout_seconds;
+                    $_SESSION["login_attempts"] = 0;
+                }
                 header("Location: ../pages/login.php?error=invalid");
                 exit();
             }
 
         } else {
             // User not found
+            $_SESSION["login_attempts"] = ($_SESSION["login_attempts"] ?? 0) + 1;
+            if ($_SESSION["login_attempts"] >= $max_attempts) {
+                $_SESSION["login_lockout"] = time() + $lockout_seconds;
+                $_SESSION["login_attempts"] = 0;
+            }
             header("Location: ../pages/login.php?error=invalid");
             exit();
         }

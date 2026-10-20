@@ -7,7 +7,7 @@ function get_role_menu() {
             ["title" => "Home", "link" => "index.html"],
             ["title" => "Admin Panel", "link" => "admin.php"],
             ["title" => "Students Directory", "link" => "students.php"],
-            ["title" => "Student API (AJAX)", "link" => "students_ajax.php"],
+            ["title" => "Live Directory", "link" => "students_ajax.php"],
             ["title" => "Manage Events", "link" => "events_manage.php"],
             ["title" => "Logout", "link" => "../php/logout.php", "special" => "logout"]
         ];

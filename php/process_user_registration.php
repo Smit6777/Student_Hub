@@ -6,13 +6,17 @@ $message     = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $name     = isset($_POST["name"]) ? trim($_POST["name"]) : "";
-    $email    = isset($_POST["email"]) ? trim($_POST["email"]) : "";
-    $password = isset($_POST["password"]) ? $_POST["password"] : "";
+    $name          = isset($_POST["name"]) ? trim($_POST["name"]) : "";
+    $email         = isset($_POST["email"]) ? trim($_POST["email"]) : "";
+    $password      = isset($_POST["password"]) ? $_POST["password"] : "";
+    $terms_consent = isset($_POST["terms_consent"]) ? true : false;
 
     if (empty($name) || empty($email) || empty($password)) {
         $status_type = "error";
         $message     = "All fields (Name, Email, Password) are required.";
+    } elseif (!$terms_consent) {
+        $status_type = "error";
+        $message     = "You must confirm you are at least 16 and agree to the Terms of Service and Privacy Policy.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $status_type = "error";
         $message     = "Invalid email format. Please provide a valid email address.";

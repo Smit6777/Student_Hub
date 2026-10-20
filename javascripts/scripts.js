@@ -50,6 +50,47 @@
         });
     }
 
+    function initCookieConsent() {
+        try {
+            if (localStorage.getItem('cookieConsent')) return;
+        } catch(e) {}
+
+        const banner = document.createElement('div');
+        banner.id = 'cookie-consent-banner';
+        banner.className = 'cookie-consent-banner';
+        banner.setAttribute('role', 'region');
+        banner.setAttribute('aria-label', 'Cookie Consent');
+        banner.innerHTML = `
+            <div class="cookie-consent-inner">
+                <div class="cookie-consent-text">
+                    <span class="cookie-icon">🍪</span>
+                    <span>We use strictly necessary cookies for session authentication and visual preferences. Learn more in our <a href="cookie-policy.html">Cookie Policy</a>.</span>
+                </div>
+                <div class="cookie-consent-buttons">
+                    <button id="cookie-accept-all" class="cookie-btn-primary">Accept All</button>
+                    <button id="cookie-accept-essential" class="cookie-btn-secondary">Essential Only</button>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(banner);
+
+        function dismiss(choice) {
+            try {
+                localStorage.setItem('cookieConsent', choice);
+            } catch(e) {}
+            banner.classList.add('cookie-consent-hide');
+            setTimeout(() => {
+                if (banner && banner.parentNode) banner.parentNode.removeChild(banner);
+            }, 300);
+        }
+
+        const btnAll = banner.querySelector('#cookie-accept-all');
+        const btnEssential = banner.querySelector('#cookie-accept-essential');
+        if (btnAll) btnAll.addEventListener('click', () => dismiss('all'));
+        if (btnEssential) btnEssential.addEventListener('click', () => dismiss('essential'));
+    }
+
     function initAll(){
         initThemeToggle();
         initHamburger();
@@ -57,6 +98,7 @@
         initSlider();
         initBanner();
         initModal();
+        initCookieConsent();
     }
 
     if(document.readyState === 'loading'){

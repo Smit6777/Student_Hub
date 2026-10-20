@@ -11,6 +11,8 @@ if (isset($_SESSION["user_id"])) {
     exit();
 }
 
+require_once "../php/csrf.php";
+
 $error_msg   = "";
 $success_msg = "";
 
@@ -31,11 +33,22 @@ if (isset($_GET["error"])) {
         case "empty":
             $error_msg = "Please enter both email and password.";
             break;
+        case "throttled":
+            $wait = isset($_GET["wait"]) ? (int)$_GET["wait"] : 5;
+            $error_msg = "Too many failed attempts. Please wait " . $wait . " minute(s) before trying again.";
+            break;
+        case "csrf":
+            $error_msg = "Security token expired or invalid. Please try logging in again.";
+            break;
     }
 }
 
-if (isset($_GET["msg"]) && $_GET["msg"] === "logged_out") {
-    $success_msg = "You have been logged out successfully.";
+if (isset($_GET["msg"])) {
+    if ($_GET["msg"] === "logged_out") {
+        $success_msg = "You have been logged out successfully.";
+    } elseif ($_GET["msg"] === "account_deleted") {
+        $success_msg = "Your account and associated data have been permanently deleted.";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -206,6 +219,7 @@ if (isset($_GET["msg"]) && $_GET["msg"] === "logged_out") {
             <?php endif; ?>
 
             <form action="../php/process_login.php" method="POST">
+                <?php echo csrf_input(); ?>
                 <div class="form-group">
                     <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" placeholder="e.g. student@studenthub.com" required>
@@ -242,12 +256,15 @@ if (isset($_GET["msg"]) && $_GET["msg"] === "logged_out") {
                 <a href="about.html">About</a>
                 <a href="events.html">Events</a>
                 <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="cookie-policy.html">Cookie Policy</a>
             </div>
             <div class="footer-section">
                 <h3>Contact</h3>
                 <p>📧 smitmakwana6777@gmail.com</p>
                 <p>📞 +91 9998403012</p>
-                <p>📍 CHARUSAT University</p>
+                <p>📍 CHARUSAT University Campus, Changa, Gujarat - 388421</p>
             </div>
         </div>
         <hr>

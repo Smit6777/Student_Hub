@@ -67,7 +67,7 @@ $error = $_GET["error"] ?? "";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Management CRUD | StudentHub</title>
+    <title>Student Directory | StudentHub</title>
     <link rel="stylesheet" href="../css/style.css">
     <style>
         .container {
@@ -506,12 +506,15 @@ $error = $_GET["error"] ?? "";
                 <a href="students.php">Students</a>
                 <a href="dashboard.php">Dashboard</a>
                 <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="cookie-policy.html">Cookie Policy</a>
             </div>
             <div class="footer-section">
                 <h3>Contact</h3>
                 <p>📧 smitmakwana6777@gmail.com</p>
                 <p>📞 +91 9998403012</p>
-                <p>📍 CHARUSAT University</p>
+                <p>📍 CHARUSAT University Campus, Changa, Gujarat - 388421</p>
             </div>
         </div>
         <hr>

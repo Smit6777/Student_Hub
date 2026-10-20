@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Records (AJAX Fetch API) | StudentHub</title>
+    <title>Student Directory | StudentHub</title>
     <link rel="stylesheet" href="../css/style.css">
     <style>
         .container {
@@ -313,8 +313,8 @@
 
     <header>
         <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
-        <h1>Student Records</h1>
-        <p>Live student directory powered by PHP JSON API and Fetch API without page reload.</p>
+        <h1>Student Directory</h1>
+        <p>Manage and update student records in real time.</p>
     </header>
 
     <nav>
@@ -322,7 +322,7 @@
         <div id="nav-links">
             <a href="index.html">Home</a>
             <a href="students_ajax.php" style="font-weight: 700; color: #2563eb;">Live Directory</a>
-            <a href="students.php">PHP CRUD</a>
+            <a href="students.php">Students</a>
             <a href="dashboard.php">Dashboard</a>
             <a href="events.html">Events</a>
             <a href="contact.html">Contact</a>
@@ -332,23 +332,20 @@
 
     <div class="container">
 
-        <!-- Live Alert Notification Box (Success and Error States) -->
         <div id="alert-container"></div>
 
-        <!-- Header -->
         <div class="page-header">
             <div class="page-title">
-                <h2>⚡ Dynamic Student Management</h2>
-                <p>Add, edit, view, and delete student records asynchronously with no page refresh.</p>
+                <h2>👥 Student Directory</h2>
+                <p>View, update, or remove student profiles.</p>
             </div>
             <div>
-                <button class="btn-add" onclick="openAddModal()">➕ Add Student (Fetch API)</button>
+                <button class="btn-add" onclick="openAddModal()">➕ Add Student</button>
             </div>
         </div>
 
-        <!-- Loading State Indicator -->
         <div id="loading" class="loading-state">
-            ⏳ Loading student records from API...
+            ⏳ Loading student records...
         </div>
 
         <!-- Dynamic Table Card -->
@@ -373,7 +370,6 @@
                         </tr>
                     </thead>
                     <tbody id="student-table-body">
-                        <!-- Populated dynamically via Fetch API -->
                     </tbody>
                 </table>
             </div>
@@ -381,7 +377,6 @@
 
     </div>
 
-    <!-- Student Modal Form (For Add & Edit via Fetch API) -->
     <div id="student-modal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">

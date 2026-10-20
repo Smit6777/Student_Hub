@@ -1,13 +1,8 @@
 <?php
-// Practical 7: PHP Form Processing with server-side validation and CSV storage
-// This file receives POST data from the StudentHub registration form.
-
-// 1. Check request method: only POST is allowed
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     die("Invalid request.");
 }
 
-// 2. Read form data safely
 $name = trim($_POST["studentName"] ?? "");
 $email = trim($_POST["email"] ?? "");
 $mobile = trim($_POST["mobile"] ?? "");
@@ -20,7 +15,6 @@ $terms = isset($_POST["terms"]);
 
 $errors = array();
 
-// 3. Server-side validation
 $allowedCourses = array("BCA", "BSc", "BTech", "MBA");
 $allowedYears = array("1", "2", "3", "4");
 $allowedGenders = array("Male", "Female", "Other");
@@ -85,7 +79,6 @@ if (!$terms) {
     $errors[] = "You must accept the terms and conditions.";
 }
 
-// 4. If there are errors, show them and stop
 if (count($errors) > 0) {
     echo "<html><head><title>Registration Failed</title><link rel='stylesheet' href='../css/style.css'></head><body style='padding:40px;'>";
     echo "<div style='max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,0.08);'>";
@@ -100,7 +93,6 @@ if (count($errors) > 0) {
     exit;
 }
 
-// 5. Sanitize accepted data before storing
 $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
 $email = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
 $mobile = htmlspecialchars($mobile, ENT_QUOTES, 'UTF-8');
@@ -108,10 +100,8 @@ $course = htmlspecialchars($course, ENT_QUOTES, 'UTF-8');
 $year = htmlspecialchars($year, ENT_QUOTES, 'UTF-8');
 $gender = htmlspecialchars($gender, ENT_QUOTES, 'UTF-8');
 
-// 6. Hash password (never store plain text)
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-// 7. Save record in CSV file
 $csvFile = __DIR__ . '/../data/registrations.csv';
 $folder = dirname($csvFile);
 
@@ -143,7 +133,6 @@ if ($file === false) {
 fputcsv($file, $dataRow);
 fclose($file);
 
-// 8. Show success page
 echo "<html><head><title>Registration Successful</title><link rel='stylesheet' href='../css/style.css'></head><body style='padding:40px;'>";
     echo "<div style='max-width:600px;margin:40px auto;background:#fff;padding:30px;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,0.08);'>";
     echo "<h2>Registration Successful!</h2>";

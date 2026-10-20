@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Policy | StudentHub</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .legal-wrapper {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+            line-height: 1.7;
+            color: #334155;
+        }
+        .legal-wrapper h1 {
+            color: #1e3a8a;
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        .legal-wrapper .last-updated {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 12px;
+        }
+        .legal-wrapper h2 {
+            color: #1e293b;
+            font-size: 1.3rem;
+            margin-top: 28px;
+            margin-bottom: 10px;
+            border-left: 4px solid #2563eb;
+            padding-left: 10px;
+        }
+        .legal-wrapper p, .legal-wrapper ul, .legal-wrapper table {
+            margin-bottom: 16px;
+        }
+        .legal-wrapper ul {
+            padding-left: 25px;
+        }
+        .legal-wrapper li {
+            margin-bottom: 8px;
+        }
+        .cookie-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .cookie-table th, .cookie-table td {
+            border: 1px solid #cbd5e1;
+            padding: 10px 14px;
+            text-align: left;
+            font-size: 0.92rem;
+        }
+        .cookie-table th {
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+        html.dark-theme .legal-wrapper {
+            background: #1e293b;
+            color: #cbd5e1;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        html.dark-theme .legal-wrapper h1 {
+            color: #60a5fa;
+        }
+        html.dark-theme .legal-wrapper h2 {
+            color: #f1f5f9;
+        }
+        html.dark-theme .legal-wrapper .last-updated {
+            color: #94a3b8;
+            border-bottom-color: #334155;
+        }
+        html.dark-theme .cookie-table th {
+            background: #334155;
+            color: #f8fafc;
+            border-color: #475569;
+        }
+        html.dark-theme .cookie-table td {
+            border-color: #475569;
+        }
+    </style>
+    <script>
+        if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.classList.add('dark-theme');
+        }
+    </script>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <img src="../image/image-removebg-preview.png" alt="StudentHub Logo" width="100">
+        <h1>StudentHub</h1>
+        <p>Your Digital Campus Portal</p>
+    </header>
+
+    <nav aria-label="StudentHub Main Navigation">
+        <button class="hamburger" aria-label="Toggle navigation menu">☰</button>
+        <div id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="register_user.html">Register</a>
+            <a href="login.php">Login</a>
+            <a href="dashboard.php">Dashboard</a>
+            <a href="events.html">Events</a>
+            <a href="contact.html">Contact</a>
+            <button id="theme-toggle" style="margin-left: 10px; padding: 8px 14px; font-weight: 600;">🌙 Dark Mode</button>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <div class="legal-wrapper">
+            <h1>Cookie Policy</h1>
+            <p class="last-updated">Last Updated: October 20, 2026</p>
+
+            <p>This Cookie Policy explains how <strong>StudentHub</strong> uses cookies and similar storage technologies when you access our campus portal. We believe in complete transparency and do not use advertising or tracking cookies.</p>
+
+            <h2>1. What Are Cookies?</h2>
+            <p>Cookies are small text files placed on your computer or mobile device by a web server when you visit a website. They allow the website to recognize your browser, remember your session authentication, and save your visual preferences.</p>
+
+            <h2>2. Cookies Used by StudentHub</h2>
+            <p>StudentHub uses only strictly necessary and functional cookies. We do <strong>not</strong> load third-party ad networks, tracking pixels, or cross-site telemetry cookies.</p>
+
+            <table class="cookie-table">
+                <thead>
+                    <tr>
+                        <th>Cookie / Storage Key</th>
+                        <th>Type</th>
+                        <th>Duration</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>PHPSESSID</code></td>
+                        <td>Strictly Necessary</td>
+                        <td>Session (cleared on browser close or 15 mins inactivity)</td>
+                        <td>Maintains your authenticated session securely across pages.</td>
+                    </tr>
+                    <tr>
+                        <td><code>remember_token</code></td>
+                        <td>Functional (Optional)</td>
+                        <td>30 Days</td>
+                        <td>Enables seamless login without retyping password if "Remember Me" was checked.</td>
+                    </tr>
+                    <tr>
+                        <td><code>localStorage: theme</code></td>
+                        <td>Preference</td>
+                        <td>Persistent</td>
+                        <td>Remembers your selection between Light Mode and Dark Mode to avoid screen flash.</td>
+                    </tr>
+                    <tr>
+                        <td><code>localStorage: bannerDismissed</code></td>
+                        <td>Preference</td>
+                        <td>Persistent</td>
+                        <td>Remembers if you dismissed the top campus announcement banner.</td>
+                    </tr>
+                    <tr>
+                        <td><code>localStorage: cookieConsent</code></td>
+                        <td>Consent</td>
+                        <td>Persistent</td>
+                        <td>Remembers your acknowledgement of the cookie consent banner.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>3. Managing and Disabling Cookies</h2>
+            <p>You can manage, inspect, or delete cookies at any time through your browser settings:</p>
+            <ul>
+                <li><strong>Google Chrome:</strong> Settings &rarr; Privacy and security &rarr; Third-party cookies.</li>
+                <li><strong>Mozilla Firefox:</strong> Settings &rarr; Privacy &amp; Security &rarr; Cookies and Site Data.</li>
+                <li><strong>Microsoft Edge:</strong> Settings &rarr; Cookies and site permissions.</li>
+                <li><strong>Apple Safari:</strong> Preferences &rarr; Privacy &rarr; Manage Website Data.</li>
+            </ul>
+            <p><em>Note: If you disable session cookies, you will not be able to log in to protected areas like your Student Dashboard or Admin Management panels.</em></p>
+
+            <h2>4. Contact Information</h2>
+            <p>For questions concerning our cookie usage:</p>
+            <ul>
+                <li><strong>Institution:</strong> StudentHub, CHARUSAT University Campus</li>
+                <li><strong>Email:</strong> smitmakwana6777@gmail.com</li>
+                <li><strong>Phone:</strong> +91 9998403012</li>
+                <li><strong>Address:</strong> CHARUSAT Campus, Changa, Anand, Gujarat - 388421</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h2>🎓 StudentHub</h2>
+                <p>Your Digital Campus Portal for academics, events, workshops, and student life.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="cookie-policy.html">Cookie Policy</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📧 smitmakwana6777@gmail.com</p>
+                <p>📞 +91 9998403012</p>
+                <p>📍 CHARUSAT University Campus, Changa, Gujarat - 388421</p>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">&copy; 2026 StudentHub | Designed by Smit Makwana</p>
+    </footer>
+
+    <script src="../javascripts/scripts.js"></script>
+</body>
+</html>
